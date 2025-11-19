@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生3D作品展示</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', 'Comic Sans MS', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .student-name {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .model-container {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(to bottom, #e8f4f8 0%, #f5f5f5 100%);
+            position: relative;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+
+        /* 載入遮罩 */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e0e0e0;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* 動畫控制按鈕 */
+        .animation-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .animation-controls.visible {
+            opacity: 1;
+        }
+
+        .control-btn {
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .control-btn:disabled {
+            background: rgba(150, 150, 150, 0.6);
+            cursor: not-allowed;
+        }
+
+        .control-btn:not(:disabled):hover {
+            background: rgba(118, 75, 162, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .control-btn.active {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        /* 漫畫風格對話框容器 */
+        .speech-bubbles-container {
+            padding: 40px 30px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            position: relative;
+            min-height: 180px;
+        }
+
+        /* 漫畫對話框基礎樣式 */
+        .speech-bubble {
+            position: relative;
+            background: white;
+            border: 3px solid #333;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            padding: 20px 30px;
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation-fill-mode: both;
+            max-width: 80%;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 左側對話框 */
+        .speech-bubble.left {
+            margin-left: 20px;
+            margin-right: auto;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+        }
+
+        .speech-bubble.left::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 30%;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 25px solid #333;
+        }
+
+        .speech-bubble.left::after {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: calc(30% + 3px);
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 20px solid #fff9e6;
+        }
+
+        /* 右側對話框 */
+        .speech-bubble.right {
+            margin-left: auto;
+            margin-right: 20px;
+            background: linear-gradient(135deg, #e6f3ff 0%, #ffffff 100%);
+        }
+
+        .speech-bubble.right::before {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 30%;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid #333;
+        }
+
+        .speech-bubble.right::after {
+            content: '';
+            position: absolute;
+            right: -14px;
+            top: calc(30% + 3px);
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 20px solid #e6f3ff;
+        }
+
+        /* 裝飾符號（只用於最後一個對話框） */
+        .bubble-decoration {
+            position: absolute;
+            font-size: 28px;
+            top: -18px;
+            right: 20px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* 延遲動畫 */
+        .speech-bubble:nth-child(1) { animation-delay: 0.1s; }
+        .speech-bubble:nth-child(2) { animation-delay: 0.4s; }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            border-top: 3px dashed #ddd;
+        }
+
+        .controls p {
+            margin: 5px 0;
+        }
+
+        /* 手機響應式 */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .model-container {
+                height: 350px;
+            }
+            
+            .speech-bubble {
+                font-size: 16px;
+                padding: 15px 20px;
+                max-width: 90%;
+            }
+
+            .control-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .speech-bubbles-container {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 學生3D作品展示</h1>
+            <div class="student-name" id="studentName">載入中...</div>
+        </div>
+
+        <div class="model-container" id="modelContainer">
+            <!-- 載入遮罩 -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">正在載入 3D 模型...</div>
+                <div style="font-size: 14px; color: #888;">請稍候 (約 10-30 秒)</div>
+            </div>
+            
+            <!-- 3D模型 -->
+            <model-viewer
+                id="modelViewer"
+                alt="學生3D作品"
+                camera-controls
+                auto-rotate
+                shadow-intensity="1"
+                exposure="1"
+                camera-orbit="0deg 75deg 2.5m"
+                style="width: 100%; height: 100%;">
+            </model-viewer>
+
+            <!-- 動畫控制按鈕 -->
+            <div class="animation-controls" id="animationControls">
+                <button class="control-btn" id="playBtn" disabled>▶️ 播放</button>
+                <button class="control-btn" id="pauseBtn" style="display: none;" disabled>⏸️ 暫停</button>
+                <button class="control-btn" id="rotateBtn" disabled>🔄 旋轉</button>
+            </div>
+        </div>
+
+        <!-- 漫畫風格對話框區域 -->
+        <div class="speech-bubbles-container" id="speechBubblesContainer">
+            <div class="speech-bubble left">正在載入作品介紹...</div>
+        </div>
+
+        <div class="controls">
+            <p>💡 使用滑鼠拖曳可以旋轉3D模型</p>
+            <p>✨ 點擊播放按鈕可以觀看動畫效果</p>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // 學生資料設定
+        // ========================================
+        const studentsData = {
+            'student1': {
+                name: '王小明',
+                model: 'MODELS/01.glb',
+                speeches: [
+                    { text: '大家好，我是王小明，這是我的3D小熊作品', type: 'left' },
+                    { text: '希望大家喜歡！', type: 'right', decoration: '❤️' }
+                ]
+            },
+            'student2': {
+                name: '李小華',
+                model: 'MODELS/student2.glb',
+                speeches: [
+                    { text: '嗨！我是李小華，這是我設計的作品', type: 'left' },
+                    { text: '謝謝大家觀賞！', type: 'right', decoration: '💖' }
+                ]
+            },
+            'student3': {
+                name: '陳小美',
+                model: 'MODELS/student3.glb',
+                speeches: [
+                    { text: '我是陳小美，這是我的創意作品', type: 'left' },
+                    { text: '希望能帶給大家驚喜', type: 'right', decoration: '🎉' }
+                ]
+            }
+        };
+
+        // 全域變數
+        let modelViewer = null;
+        let isRotating = true;
+        let modelLoaded = false;
+
+        // DOM 元素
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const animationControls = document.getElementById('animationControls');
+        const speechBubblesContainer = document.getElementById('speechBubblesContainer');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const rotateBtn = document.getElementById('rotateBtn');
+
+        // 從網址獲取學生ID
+        function getStudentId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || urlParams.get('student') || 'student1';
+        }
+
+        // 載入學生作品
+        function loadStudentWork() {
+            const studentId = getStudentId();
+            const studentData = studentsData[studentId];
+
+            if (!studentData) {
+                showError('找不到該學生的作品');
+                return;
+            }
+
+            document.getElementById('studentName').textContent = studentData.name;
+            displaySpeechBubbles(studentData.speeches);
+            loadModel(studentData.model);
+        }
+
+        // 顯示漫畫對話框
+        function displaySpeechBubbles(speeches) {
+            speechBubblesContainer.innerHTML = '';
+            
+            speeches.forEach((speech, index) => {
+                const bubble = document.createElement('div');
+                bubble.className = `speech-bubble ${speech.type}`;
+                bubble.style.animationDelay = `${index * 0.3}s`;
+                
+                // 只有最後一個對話框才添加裝飾
+                if (speech.decoration && index === speeches.length - 1) {
+                    const decoration = document.createElement('span');
+                    decoration.className = 'bubble-decoration';
+                    decoration.textContent = speech.decoration;
+                    bubble.appendChild(decoration);
+                }
+                
+                const textNode = document.createTextNode(speech.text);
+                bubble.appendChild(textNode);
+                
+                speechBubblesContainer.appendChild(bubble);
+            });
+        }
+
+        // 載入3D模型
+        function loadModel(modelUrl) {
+            modelViewer = document.getElementById('modelViewer');
+            modelViewer.src = modelUrl;
+
+            modelViewer.addEventListener('progress', (event) => {
+                const progress = (event.detail.totalProgress * 100).toFixed(1);
+                console.log('載入進度:', progress + '%');
+            });
+
+            modelViewer.addEventListener('load', () => {
+                console.log('✅ 模型載入完成！');
+                modelLoaded = true;
+                
+                setTimeout(() => {
+                    loadingOverlay.classList.add('hidden');
+                    animationControls.classList.add('visible');
+                }, 500);
+
+                setTimeout(() => {
+                    checkAndSetupAnimations();
+                }, 800);
+            });
+
+            modelViewer.addEventListener('error', (event) => {
+                console.error('❌ 模型載入失敗');
+                showError('模型載入失敗');
+            });
+
+            setupControlButtons();
+        }
+
+        // 檢查並設定動畫
+        function checkAndSetupAnimations() {
+            try {
+                const animations = modelViewer.availableAnimations;
+                console.log('可用動畫:', animations);
+
+                if (animations && animations.length > 0) {
+                    modelViewer.animationName = animations[0];
+                    
+                    playBtn.disabled = false;
+                    pauseBtn.disabled = false;
+                    rotateBtn.disabled = false;
+                    
+                    setTimeout(() => {
+                        try {
+                            modelViewer.play();
+                            playBtn.style.display = 'none';
+                            pauseBtn.style.display = 'block';
+                            console.log('▶️ 自動開始播放動畫');
+                        } catch (error) {
+                            console.error('自動播放失敗:', error);
+                        }
+                    }, 500);
+                } else {
+                    rotateBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('檢查動畫時出錯:', error);
+            }
+        }
+
+        // 設定控制按鈕
+        function setupControlButtons() {
+            playBtn.onclick = () => {
+                if (!modelLoaded) return;
+                try {
+                    modelViewer.play();
+                    playBtn.style.display = 'none';
+                    pauseBtn.style.display = 'block';
+                } catch (error) {
+                    console.error('播放失敗:', error);
+                }
+            };
+
+            pauseBtn.onclick = () => {
+                if (!modelLoaded) return;
+                try {
+                    modelViewer.pause();
+                    pauseBtn.style.display = 'none';
+                    playBtn.style.display = 'block';
+                } catch (error) {
+                    console.error('暫停失敗:', error);
+                }
+            };
+
+            rotateBtn.onclick = () => {
+                if (!modelLoaded) return;
+                try {
+                    isRotating = !isRotating;
+                    if (isRotating) {
+                        modelViewer.setAttribute('auto-rotate', '');
+                        rotateBtn.textContent = '🔄 旋轉';
+                        rotateBtn.classList.remove('active');
+                    } else {
+                        modelViewer.removeAttribute('auto-rotate');
+                        rotateBtn.textContent = '⏹️ 停止';
+                        rotateBtn.classList.add('active');
+                    }
+                } catch (error) {
+                    console.error('切換旋轉失敗:', error);
+                }
+            };
+        }
+
+        // 顯示錯誤
+        function showError(message) {
+            document.getElementById('studentName').textContent = '錯誤';
+            speechBubblesContainer.innerHTML = `
+                <div class="speech-bubble left">${message}</div>
+            `;
+        }
+
+        // 頁面載入
+        window.addEventListener('DOMContentLoaded', loadStudentWork);
+    </script>
+</body>
+</html>

@@ -58,15 +58,61 @@
         model-viewer {
             width: 100%;
             height: 100%;
+            background-color: #f5f5f5;
         }
 
-        .loading {
+        /* 載入進度顯示 */
+        .loading-overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e0e0e0;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
             font-size: 18px;
-            color: #666;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .loading-progress {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .loading-tip {
+            font-size: 14px;
+            color: #888;
         }
 
         /* 動畫控制按鈕 */
@@ -78,6 +124,12 @@
             display: flex;
             gap: 10px;
             z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .animation-controls.visible {
+            opacity: 1;
         }
 
         .control-btn {
@@ -93,58 +145,43 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .control-btn:hover {
+        .control-btn:disabled {
+            background: rgba(150, 150, 150, 0.6);
+            cursor: not-allowed;
+        }
+
+        .control-btn:not(:disabled):hover {
             background: rgba(118, 75, 162, 0.9);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .control-btn:active {
-            transform: translateY(0);
         }
 
         .control-btn.active {
             background: rgba(231, 76, 60, 0.9);
         }
 
-        /* 動畫列表 */
-        .animation-list {
+        /* 動畫資訊顯示 */
+        .animation-info {
             padding: 20px 30px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e0e0e0;
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            display: none;
         }
 
-        .animation-list h3 {
+        .animation-info.visible {
+            display: block;
+        }
+
+        .animation-info h3 {
             color: #667eea;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 18px;
         }
 
-        .animation-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .animation-btn {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .animation-btn:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .animation-btn.active {
-            background: #667eea;
-            color: white;
+        .animation-info p {
+            color: #555;
+            line-height: 1.6;
+            margin: 5px 0;
         }
 
         .subtitle-container {
@@ -178,12 +215,6 @@
             font-size: 18px;
         }
 
-        .instructions {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #888;
-        }
-
         /* 手機響應式設計 */
         @media (max-width: 600px) {
             .header h1 {
@@ -204,7 +235,6 @@
             }
 
             .animation-controls {
-                bottom: 10px;
                 gap: 5px;
             }
         }
@@ -217,20 +247,40 @@
             <div class="student-name" id="studentName">載入中...</div>
         </div>
 
-        <!-- 動畫列表 -->
-        <div class="animation-list" id="animationList" style="display: none;">
-            <h3>🎬 可用動畫</h3>
-            <div class="animation-buttons" id="animationButtons"></div>
+        <!-- 動畫資訊區 -->
+        <div class="animation-info" id="animationInfo">
+            <h3>🎬 動畫資訊</h3>
+            <p id="animationDetails">正在檢測動畫...</p>
         </div>
 
         <div class="model-container" id="modelContainer">
-            <div class="loading">正在載入3D模型...</div>
+            <!-- 載入遮罩 -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">正在載入 3D 模型...</div>
+                <div class="loading-progress" id="loadingProgress">準備中...</div>
+                <div class="loading-tip">檔案較大，請稍候 (約 10-30 秒)</div>
+            </div>
             
+            <!-- 3D模型 -->
+            <model-viewer
+                id="modelViewer"
+                alt="學生3D作品"
+                camera-controls
+                auto-rotate
+                shadow-intensity="1"
+                exposure="1"
+                camera-orbit="0deg 75deg 2.5m"
+                min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 5m"
+                style="width: 100%; height: 100%;">
+            </model-viewer>
+
             <!-- 動畫控制按鈕 -->
-            <div class="animation-controls" id="animationControls" style="display: none;">
-                <button class="control-btn" id="playBtn">▶️ 播放</button>
-                <button class="control-btn" id="pauseBtn" style="display: none;">⏸️ 暫停</button>
-                <button class="control-btn" id="rotateBtn">🔄 自動旋轉</button>
+            <div class="animation-controls" id="animationControls">
+                <button class="control-btn" id="playBtn" disabled>▶️ 播放</button>
+                <button class="control-btn" id="pauseBtn" style="display: none;" disabled>⏸️ 暫停</button>
+                <button class="control-btn" id="rotateBtn" disabled>🔄 旋轉</button>
             </div>
         </div>
 
@@ -239,30 +289,28 @@
         </div>
 
         <div class="controls">
-            <p>💡 使用手指拖曳可以旋轉3D模型</p>
-            <p class="instructions">雙指縮放可以放大或縮小模型</p>
-            <p class="instructions">點擊下方按鈕可以播放動畫</p>
+            <p>💡 使用滑鼠拖曳可以旋轉3D模型</p>
+            <p>滾輪可以放大或縮小模型</p>
+            <p>✨ 點擊播放按鈕可以觀看動畫</p>
         </div>
     </div>
 
     <script>
         // ========================================
-        // 👇 請在這裡修改學生資料
+        // 學生資料設定
         // ========================================
         const studentsData = {
-            // 學生1 - 範例
             'student1': {
                 name: '王小明',
                 model: 'MODELS/01.glb',
                 subtitles: [
                     '大家好，我是王小明',
-                    '這是我的3D作品',
+                    '這是我的3D小熊作品',
+                    '小熊有完整的骨骼系統和動畫',
                     '我花了很多時間完成這件作品',
                     '希望大家喜歡！'
                 ]
             },
-            
-            // 學生2 - 請依照此格式新增
             'student2': {
                 name: '李小華',
                 model: 'MODELS/student2.glb',
@@ -272,8 +320,6 @@
                     '謝謝大家觀賞！'
                 ]
             },
-            
-            // 學生3 - 繼續新增更多學生
             'student3': {
                 name: '陳小美',
                 model: 'MODELS/student3.glb',
@@ -284,12 +330,21 @@
                 ]
             }
         };
-        // ========================================
-        // 👆 學生資料編輯區結束
-        // ========================================
 
+        // 全域變數
         let modelViewer = null;
         let isRotating = true;
+        let isPlaying = false;
+        let modelLoaded = false;
+
+        // DOM 元素
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingProgress = document.getElementById('loadingProgress');
+        const animationControls = document.getElementById('animationControls');
+        const animationInfo = document.getElementById('animationInfo');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const rotateBtn = document.getElementById('rotateBtn');
 
         // 從網址獲取學生ID
         function getStudentId() {
@@ -308,129 +363,149 @@
             }
 
             document.getElementById('studentName').textContent = studentData.name;
-            loadModel(studentData.model);
             displaySubtitles(studentData.subtitles);
+            loadModel(studentData.model);
         }
 
-        // 載入3D模型（帶動畫支援）
+        // 載入3D模型
         function loadModel(modelUrl) {
-            const container = document.getElementById('modelContainer');
-            container.innerHTML = `
-                <model-viewer
-                    id="modelViewer"
-                    src="${modelUrl}"
-                    alt="學生3D作品"
-                    auto-rotate
-                    camera-controls
-                    shadow-intensity="1"
-                    exposure="1"
-                    animation-name=""
-                    autoplay
-                    style="width: 100%; height: 100%;">
-                    <div slot="progress-bar" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #667eea; font-size: 16px;">
-                        載入中...
-                    </div>
-                </model-viewer>
-                <div class="animation-controls" id="animationControls" style="display: none;">
-                    <button class="control-btn" id="playBtn">▶️ 播放</button>
-                    <button class="control-btn" id="pauseBtn" style="display: none;">⏸️ 暫停</button>
-                    <button class="control-btn" id="rotateBtn">🔄 自動旋轉</button>
-                </div>
-            `;
-
             modelViewer = document.getElementById('modelViewer');
             
-            // 模型載入完成後檢查動畫
-            modelViewer.addEventListener('load', () => {
-                console.log('模型載入完成！');
-                checkAnimations();
-                setupControls();
+            // 設定模型來源
+            modelViewer.src = modelUrl;
+            console.log('開始載入模型:', modelUrl);
+
+            // 監聽載入進度
+            modelViewer.addEventListener('progress', (event) => {
+                const progress = (event.detail.totalProgress * 100).toFixed(1);
+                loadingProgress.textContent = `載入進度: ${progress}%`;
+                console.log('載入進度:', progress + '%');
             });
+
+            // 模型載入完成
+            modelViewer.addEventListener('load', () => {
+                console.log('✅ 模型載入完成！');
+                modelLoaded = true;
+                
+                // 延遲隱藏載入遮罩
+                setTimeout(() => {
+                    loadingOverlay.classList.add('hidden');
+                    animationControls.classList.add('visible');
+                }, 500);
+
+                // 檢查並設定動畫
+                setTimeout(() => {
+                    checkAndSetupAnimations();
+                }, 800);
+            });
+
+            // 載入錯誤處理
+            modelViewer.addEventListener('error', (event) => {
+                console.error('❌ 模型載入失敗');
+                showError('模型載入失敗，請檢查檔案路徑是否正確');
+            });
+
+            // 設定控制按鈕事件
+            setupControlButtons();
         }
 
-        // 檢查模型中的動畫
-        function checkAnimations() {
-            const animations = modelViewer.availableAnimations;
-            console.log('可用動畫:', animations);
+        // 檢查並設定動畫
+        function checkAndSetupAnimations() {
+            try {
+                const animations = modelViewer.availableAnimations;
+                console.log('可用動畫:', animations);
 
-            if (animations && animations.length > 0) {
-                // 顯示動畫控制按鈕
-                document.getElementById('animationControls').style.display = 'flex';
-                
-                // 顯示動畫列表
-                const animationList = document.getElementById('animationList');
-                const animationButtons = document.getElementById('animationButtons');
-                
-                animationList.style.display = 'block';
-                animationButtons.innerHTML = '';
-                
-                animations.forEach((animName, index) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'animation-btn';
-                    btn.textContent = animName || `動畫 ${index + 1}`;
-                    btn.onclick = () => playAnimation(animName);
-                    animationButtons.appendChild(btn);
-                });
+                if (animations && animations.length > 0) {
+                    // 顯示動畫資訊
+                    animationInfo.classList.add('visible');
+                    
+                    const animName = animations[0];
+                    const animationDetails = document.getElementById('animationDetails');
+                    animationDetails.innerHTML = `
+                        ✅ 此模型包含 <strong>${animations.length}</strong> 個動畫<br>
+                        動畫名稱: <strong>${animName}</strong><br>
+                        點擊播放按鈕即可觀看動畫效果
+                    `;
 
-                // 自動播放第一個動畫
-                if (animations[0]) {
-                    modelViewer.animationName = animations[0];
-                    modelViewer.play();
+                    // 設定動畫
+                    modelViewer.animationName = animName;
+                    console.log('已設定動畫:', animName);
+                    
+                    // 啟用控制按鈕
+                    playBtn.disabled = false;
+                    pauseBtn.disabled = false;
+                    rotateBtn.disabled = false;
+                    
+                    // 自動播放動畫
+                    setTimeout(() => {
+                        try {
+                            modelViewer.play();
+                            isPlaying = true;
+                            playBtn.style.display = 'none';
+                            pauseBtn.style.display = 'block';
+                            console.log('▶️ 自動開始播放動畫');
+                        } catch (error) {
+                            console.error('自動播放失敗:', error);
+                        }
+                    }, 500);
+                } else {
+                    console.log('此模型不包含動畫');
+                    // 即使沒有動畫，也啟用旋轉按鈕
+                    rotateBtn.disabled = false;
                 }
-            } else {
-                console.log('此模型沒有內建動畫');
+            } catch (error) {
+                console.error('檢查動畫時出錯:', error);
             }
         }
 
-        // 播放指定動畫
-        function playAnimation(animName) {
-            if (!modelViewer) return;
-            
-            modelViewer.animationName = animName;
-            modelViewer.play();
-            
-            // 更新按鈕狀態
-            document.querySelectorAll('.animation-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // 更新播放按鈕
-            document.getElementById('playBtn').style.display = 'none';
-            document.getElementById('pauseBtn').style.display = 'block';
-        }
-
         // 設定控制按鈕
-        function setupControls() {
-            const playBtn = document.getElementById('playBtn');
-            const pauseBtn = document.getElementById('pauseBtn');
-            const rotateBtn = document.getElementById('rotateBtn');
-
+        function setupControlButtons() {
             // 播放按鈕
             playBtn.onclick = () => {
-                modelViewer.play();
-                playBtn.style.display = 'none';
-                pauseBtn.style.display = 'block';
+                if (!modelLoaded) return;
+                try {
+                    modelViewer.play();
+                    isPlaying = true;
+                    playBtn.style.display = 'none';
+                    pauseBtn.style.display = 'block';
+                    console.log('▶️ 播放動畫');
+                } catch (error) {
+                    console.error('播放失敗:', error);
+                }
             };
 
             // 暫停按鈕
             pauseBtn.onclick = () => {
-                modelViewer.pause();
-                pauseBtn.style.display = 'none';
-                playBtn.style.display = 'block';
+                if (!modelLoaded) return;
+                try {
+                    modelViewer.pause();
+                    isPlaying = false;
+                    pauseBtn.style.display = 'none';
+                    playBtn.style.display = 'block';
+                    console.log('⏸️ 暫停動畫');
+                } catch (error) {
+                    console.error('暫停失敗:', error);
+                }
             };
 
-            // 自動旋轉按鈕
+            // 旋轉按鈕
             rotateBtn.onclick = () => {
-                isRotating = !isRotating;
-                if (isRotating) {
-                    modelViewer.setAttribute('auto-rotate', '');
-                    rotateBtn.textContent = '🔄 自動旋轉';
-                    rotateBtn.classList.remove('active');
-                } else {
-                    modelViewer.removeAttribute('auto-rotate');
-                    rotateBtn.textContent = '⏹️ 停止旋轉';
-                    rotateBtn.classList.add('active');
+                if (!modelLoaded) return;
+                try {
+                    isRotating = !isRotating;
+                    if (isRotating) {
+                        modelViewer.setAttribute('auto-rotate', '');
+                        rotateBtn.textContent = '🔄 旋轉';
+                        rotateBtn.classList.remove('active');
+                        console.log('開啟自動旋轉');
+                    } else {
+                        modelViewer.removeAttribute('auto-rotate');
+                        rotateBtn.textContent = '⏹️ 停止';
+                        rotateBtn.classList.add('active');
+                        console.log('關閉自動旋轉');
+                    }
+                } catch (error) {
+                    console.error('切換旋轉失敗:', error);
                 }
             };
         }
@@ -449,7 +524,7 @@
             document.getElementById('modelContainer').innerHTML = 
                 `<div class="error">${message}</div>`;
             document.getElementById('subtitleContainer').innerHTML = 
-                `<div class="error">請確認QR Code是否正確</div>`;
+                `<div class="error">請確認檔案路徑和格式是否正確</div>`;
         }
 
         // 頁面載入時執行

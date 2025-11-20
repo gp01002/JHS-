@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>學生3D作品展示</title>
+    <title>3D作品展示</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
         * {
@@ -324,7 +324,7 @@
             <!-- 3D模型 -->
             <model-viewer
                 id="modelViewer"
-                alt="學生3D作品"
+                alt="3D作品"
                 camera-controls
                 auto-rotate
                 shadow-intensity="1"
@@ -358,27 +358,27 @@
         // ========================================
         const studentsData = {
             'student1': {
-                name: '王小明',
+                name: '花心猴',
                 model: 'MODELS/01.glb',
                 speeches: [
-                    { text: '大家好，我是王小明，這是我的3D小熊作品', type: 'left' },
-                    { text: '希望大家喜歡！', type: 'right', decoration: '❤️' }
+                    { text: '花心是喜歡花的心', type: 'left' },
+                    { text: '我喜歡棉花糖', type: 'right', decoration: '❤️' }
                 ]
             },
             'student2': {
-                name: '李小華',
+                name: '博士兔',
                 model: 'MODELS/02.glb',
                 speeches: [
-                    { text: '嗨！我是李小華，這是我設計的作品', type: 'left' },
-                    { text: '謝謝大家觀賞！', type: 'right', decoration: '💖' }
+                    { text: '我愛讀書但我視力很深', type: 'left' },
+                    { text: '馬卡龍是我的最愛！', type: 'right', decoration: '💖' }
                 ]
             },
             'student3': {
-                name: '陳小美',
-                model: 'MODELS/student3.glb',
+                name: 'Day Day',
+                model: 'MODELS/03.glb',
                 speeches: [
-                    { text: '我是陳小美，這是我的創意作品', type: 'left' },
-                    { text: '希望能帶給大家驚喜', type: 'right', decoration: '🎉' }
+                    { text: '愛塗鴉是我的本性', type: 'left' },
+                    { text: '我的願望是把世界塗成彩色', type: 'right', decoration: '🎉' }
                 ]
             }
         };

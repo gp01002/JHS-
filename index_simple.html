@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D作品展示</title>
+    <title>學生3D作品展示</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
         * {
@@ -324,7 +324,7 @@
             <!-- 3D模型 -->
             <model-viewer
                 id="modelViewer"
-                alt="3D作品"
+                alt="學生3D作品"
                 camera-controls
                 auto-rotate
                 shadow-intensity="1"
@@ -358,37 +358,37 @@
         // ========================================
         const studentsData = {
             'student1': {
-                name: '花心猴',
+                name: '楊壹壹',
                 model: 'MODELS/01.glb',
                 speeches: [
-                    { text: '花心是喜歡花的心', type: 'left' },
-                    { text: '我喜歡棉花糖', type: 'right', decoration: '❤️' }
+                    { text: '大家好，我是楊壹壹，這是我的3D作品', type: 'left' },
+                    { text: '希望大家喜歡！', type: 'right', decoration: '🦋' }
                 ]
             },
             'student2': {
-                name: '博士兔',
+                name: '張品卉',
                 model: 'MODELS/02.glb',
                 speeches: [
-                    { text: '我愛讀書但我視力很深', type: 'left' },
-                    { text: '馬卡龍是我的最愛！', type: 'right', decoration: '💖' }
+                    { text: '嗨！我是張品卉，這是我設計的作品', type: 'left' },
+                    { text: '謝謝大家觀賞！', type: 'right', decoration: '🎨' }
                 ]
             },
             'student3': {
-                name: 'Day Day',
+                name: '馬維彤',
                 model: 'MODELS/03.glb',
                 speeches: [
-                    { text: '愛塗鴉是我的本性', type: 'left' },
-                    { text: '我的願望是把世界塗成彩色', type: 'right', decoration: '🎉' }
+                    { text: '我是馬維彤，這是我的創意作品', type: 'left' },
+                    { text: '希望能帶給大家驚喜', type: 'right', decoration: '✨' }
                 ]
             },
             'student4': {
-                name: '小美',
+                name: '黃品瑄',
                 model: 'MODELS/04.glb',
                 speeches: [
-                    { text: '我出生劇場，載歌載舞', type: 'left' },
-                    { text: '邀請您與我一起登上舞台!', type: 'right', decoration: '🎉' }
+                    { text: '大家好，我是黃品瑄，這是我的作品', type: 'left' },
+                    { text: '請多多指教！', type: 'right', decoration: '🌸' }
                 ]
-            -}
+            }
         };
 
         // 全域變數
@@ -475,7 +475,7 @@
 
             modelViewer.addEventListener('error', (event) => {
                 console.error('❌ 模型載入失敗');
-                showError('模型載入失敗');
+                showError('模型載入失敗，請檢查檔案是否存在');
             });
 
             setupControlButtons();

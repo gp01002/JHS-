@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Microsoft JhengHei', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -23,7 +23,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             width: 100%;
             background: white;
             border-radius: 20px;
@@ -44,21 +44,31 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             color: white;
             padding: 40px 30px;
             text-align: center;
         }
 
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 250px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
         }
 
         .header p {
-            font-size: 16px;
-            opacity: 0.9;
+            font-size: 18px;
+            opacity: 0.95;
+            margin-top: 15px;
         }
 
         .students-grid {
@@ -69,8 +79,8 @@
         }
 
         .student-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
-            border: 3px solid #e0e0e0;
+            background: linear-gradient(135deg, #E3F2FD 0%, #ffffff 100%);
+            border: 3px solid #BBDEFB;
             border-radius: 20px;
             padding: 30px;
             text-align: center;
@@ -87,7 +97,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -97,38 +107,38 @@
 
         .student-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.4);
+            border-color: #4A90E2;
         }
 
         .student-avatar {
             width: 90px;
             height: 90px;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 42px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
         }
 
         .student-name {
             font-size: 22px;
             font-weight: bold;
-            color: #333;
+            color: #1976D2;
             margin-bottom: 10px;
         }
 
         .student-id {
             font-size: 13px;
-            color: #888;
+            color: #64B5F6;
             margin-bottom: 15px;
         }
 
         .view-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             color: white;
             border: none;
             padding: 10px 25px;
@@ -137,33 +147,35 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
         }
 
         .view-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.5);
         }
 
         .footer {
             padding: 30px;
-            background: #f8f9fa;
+            background: linear-gradient(to bottom, #f0f8ff 0%, #E3F2FD 100%);
             text-align: center;
-            color: #666;
-            border-top: 3px dashed #ddd;
+            color: #555;
+            border-top: 3px dashed #BBDEFB;
         }
 
         .footer h3 {
-            color: #667eea;
+            color: #1976D2;
             margin-bottom: 15px;
+            font-size: 22px;
         }
 
         .qr-info {
             background: white;
             padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            border: 2px solid #BBDEFB;
             margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.1);
         }
 
         .qr-info p {
@@ -173,17 +185,22 @@
         }
 
         .qr-info code {
-            background: #f0f0f0;
-            padding: 3px 8px;
-            border-radius: 4px;
+            background: #E3F2FD;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-family: 'Courier New', monospace;
-            color: #667eea;
+            color: #1976D2;
+            font-size: 12px;
         }
 
-        /* 手機響應式 */
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 26px;
+            .logo {
+                max-width: 180px;
+                max-height: 100px;
+            }
+
+            .header p {
+                font-size: 16px;
             }
 
             .students-grid {
@@ -200,11 +217,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎨 學生3D作品展示</h1>
-            <p>請選擇要觀看的學生作品</p>
+            <!-- LOGO 顯示區 -->
+            <div class="logo-container">
+                <img src="MODELS/00.png" alt="Logo" class="logo">
+            </div>
+            <p>請選擇要觀看的學生作品（共9位學生）</p>
         </div>
 
-        <div class="students-grid">
+        <div class="students-grid" id="studentsGrid">
             <!-- 學生卡片將由 JavaScript 動態生成 -->
         </div>
 
@@ -212,11 +232,16 @@
             <h3>📱 QR Code 使用說明</h3>
             <div class="qr-info">
                 <p><strong>如何為每位學生生成 QR Code：</strong></p>
-                <p>學生1 (楊壹壹)：<code>index_simple.html?id=student1</code></p>
-                <p>學生2 (張品卉)：<code>index_simple.html?id=student2</code></p>
-                <p>學生3 (馬維彤)：<code>index_simple.html?id=student3</code></p>
-                <p>學生4 (黃品瑄)：<code>index_simple.html?id=student4</code></p>
-                <p style="margin-top: 15px; color: #667eea;">
+                <p>楊壹壹：<code>index_simple.html?id=student1</code></p>
+                <p>張品卉：<code>index_simple.html?id=student2</code></p>
+                <p>馬維彤：<code>index_simple.html?id=student3</code></p>
+                <p>黃品瑄：<code>index_simple.html?id=student4</code></p>
+                <p>陳頤樂：<code>index_simple.html?id=student5</code></p>
+                <p>羅安：<code>index_simple.html?id=student6</code></p>
+                <p>劉彥秀：<code>index_simple.html?id=student7</code></p>
+                <p>丁洛菱：<code>index_simple.html?id=student8</code></p>
+                <p>林映辰：<code>index_simple.html?id=student9</code></p>
+                <p style="margin-top: 15px; color: #1976D2; font-weight: bold;">
                     💡 將完整網址轉換成 QR Code，掃描後即可直接觀看該學生作品！
                 </p>
             </div>
@@ -245,12 +270,37 @@
                 name: '黃品瑄',
                 emoji: '🌸',
                 id: 'student4'
+            },
+            'student5': {
+                name: '陳頤樂',
+                emoji: '🌟',
+                id: 'student5'
+            },
+            'student6': {
+                name: '羅安',
+                emoji: '💫',
+                id: 'student6'
+            },
+            'student7': {
+                name: '劉彥秀',
+                emoji: '🎭',
+                id: 'student7'
+            },
+            'student8': {
+                name: '丁洛菱',
+                emoji: '🌺',
+                id: 'student8'
+            },
+            'student9': {
+                name: '林映辰',
+                emoji: '🌈',
+                id: 'student9'
             }
         };
 
         // 動態生成學生卡片
         function generateStudentCards() {
-            const grid = document.querySelector('.students-grid');
+            const grid = document.getElementById('studentsGrid');
             
             Object.values(studentsData).forEach(student => {
                 const card = document.createElement('div');
@@ -272,7 +322,6 @@
 
         // 查看學生作品
         function viewStudent(studentId) {
-            // 跳轉到展示頁面，並帶上學生ID參數
             window.location.href = `index_simple.html?id=${studentId}`;
         }
 

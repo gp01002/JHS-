@@ -220,7 +220,7 @@
             <div class="logo-container">
                 <img src="MODELS/00.png" alt="Logo" class="logo">
             </div>
-            <p>請選擇要觀看的學生作品（共21位學生）</p>
+            <p>請選擇要觀看的學生作品（共24位學生）</p>
         </div>
 
         <div class="students-grid" id="studentsGrid">
@@ -232,7 +232,7 @@
             <div class="qr-info">
                 <p><strong>如何為每位學生生成 QR Code：</strong></p>
                 <p>使用網址：<code>index_simple.html?id=student編號</code></p>
-                <p>例如：楊壹壹 <code>?id=student1</code> / 王瑀彤 <code>?id=student10</code> / 邱子熙 <code>?id=student21</code></p>
+                <p>例如：蕭方柔 <code>?id=student1</code> / 李玨潤 <code>?id=student22</code> / 孫以澄 <code>?id=student24</code></p>
                 <p style="margin-top: 15px; color: #1976D2; font-weight: bold;">
                     💡 將完整網址轉換成 QR Code，掃描後即可直接觀看該學生作品！
                 </p>
@@ -241,29 +241,32 @@
     </div>
 
     <script>
-        // 學生資料 - 共21位
+        // 學生資料 - 共24位（已修正所有名字）
         const studentsData = {
-            'student1': { name: '楊壹壹', emoji: '🦋', id: 'student1' },
+            'student1': { name: '蕭方柔', emoji: '🐵', id: 'student1' },
             'student2': { name: '張品卉', emoji: '🎨', id: 'student2' },
             'student3': { name: '馬維彤', emoji: '✨', id: 'student3' },
             'student4': { name: '黃品瑄', emoji: '🌸', id: 'student4' },
-            'student5': { name: '陳頤樂', emoji: '🌟', id: 'student5' },
+            'student5': { name: '楊壹壹', emoji: '🦋', id: 'student5' },
             'student6': { name: '羅安', emoji: '💫', id: 'student6' },
             'student7': { name: '劉彥秀', emoji: '🎭', id: 'student7' },
-            'student8': { name: '丁洛菱', emoji: '🌺', id: 'student8' },
+            'student8': { name: '丁若羚', emoji: '🌺', id: 'student8' },
             'student9': { name: '林映辰', emoji: '🌈', id: 'student9' },
             'student10': { name: '王瑀彤', emoji: '🌻', id: 'student10' },
             'student11': { name: '許安', emoji: '🎪', id: 'student11' },
             'student12': { name: '許子芸', emoji: '🎯', id: 'student12' },
             'student13': { name: '林品彤', emoji: '💐', id: 'student13' },
             'student14': { name: '陳頣樂', emoji: '⭐', id: 'student14' },
-            'student15': { name: '蔡汶祐', emoji: '🎵', id: 'student15' },
+            'student15': { name: '吳姵諭', emoji: '🐍', id: 'student15' },
             'student16': { name: '江明曦', emoji: '🎬', id: 'student16' },
             'student17': { name: '林曉黎', emoji: '🎤', id: 'student17' },
-            'student18': { name: '吳珮鈺', emoji: '🎧', id: 'student18' },
+            'student18': { name: '簡妤庭', emoji: '🎧', id: 'student18' },
             'student19': { name: '莊加安', emoji: '🎹', id: 'student19' },
-            'student20': { name: '羅安', emoji: '🎸', id: 'student20' },
-            'student21': { name: '邱子熙', emoji: '🎻', id: 'student21' }
+            'student20': { name: '蔡汶佑', emoji: '🎸', id: 'student20' },
+            'student21': { name: '邱子熙', emoji: '🎻', id: 'student21' },
+            'student22': { name: '李玨潤', emoji: '🦖', id: 'student22' },
+            'student23': { name: '林書歆', emoji: '🐑', id: 'student23' },
+            'student24': { name: '孫以澄', emoji: '🐮', id: 'student24' }
         };
 
         function generateStudentCards() {

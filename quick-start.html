@@ -13,9 +13,10 @@
 
         body {
             font-family: 'Microsoft JhengHei', Arial, sans-serif;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             padding: 20px;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
@@ -27,8 +28,21 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            max-width: 400px;
+            max-height: 240px;
+            width: auto;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
         h1 {
-            color: #667eea;
+            color: #4A90E2;
             text-align: center;
             margin-bottom: 10px;
             font-size: 32px;
@@ -43,13 +57,13 @@
         .method {
             margin: 40px 0;
             padding: 30px;
-            border: 3px solid #e0e0e0;
+            border: 3px solid #BBDEFB;
             border-radius: 15px;
-            background: #fafafa;
+            background: linear-gradient(135deg, #E3F2FD 0%, #ffffff 100%);
         }
 
         .method h2 {
-            color: #667eea;
+            color: #1976D2;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -57,7 +71,7 @@
         }
 
         .method-number {
-            background: #667eea;
+            background: #4A90E2;
             color: white;
             width: 40px;
             height: 40px;
@@ -81,7 +95,7 @@
             padding: 15px;
             background: white;
             border-radius: 10px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #4A90E2;
         }
 
         .step-icon {
@@ -100,54 +114,44 @@
             overflow-x: auto;
         }
 
-        .url-examples {
+        .student-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
             margin: 20px 0;
         }
 
-        .url-card {
+        .student-item {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #BBDEFB;
             text-align: center;
         }
 
-        .url-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .url-card code {
-            background: #f0f0f0;
-            padding: 8px 12px;
-            border-radius: 5px;
-            display: block;
-            margin-top: 10px;
-            font-size: 12px;
-            word-break: break-all;
+        .student-item strong {
+            color: #1976D2;
+            font-size: 18px;
         }
 
         .highlight {
-            background: #fff3cd;
+            background: #E3F2FD;
             padding: 20px;
             border-radius: 10px;
-            border-left: 5px solid #ffc107;
+            border-left: 5px solid #4A90E2;
             margin: 20px 0;
         }
 
         .button-demo {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             color: white;
             padding: 12px 30px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
             margin: 10px 5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
             transition: transform 0.3s;
         }
 
@@ -165,7 +169,7 @@
         }
 
         .flow-box {
-            background: #667eea;
+            background: #4A90E2;
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -175,7 +179,7 @@
 
         .flow-arrow {
             font-size: 30px;
-            color: #667eea;
+            color: #4A90E2;
         }
 
         @media (max-width: 600px) {
@@ -183,6 +187,11 @@
                 padding: 20px;
             }
             
+            .logo {
+                max-width: 300px;
+                max-height: 180px;
+            }
+
             .method {
                 padding: 20px;
             }
@@ -194,13 +203,21 @@
             .flow-arrow {
                 transform: rotate(90deg);
             }
+
+            .student-list {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="logo-container">
+            <img src="MODELS/00.png" alt="Logo" class="logo">
+        </div>
+
         <h1>🎯 快速入門指南</h1>
-        <p class="subtitle">三種方法切換不同學生的作品</p>
+        <p class="subtitle">三種方法切換不同學生的作品（共24位學生）</p>
 
         <!-- 方法 1 -->
         <div class="method">
@@ -212,11 +229,11 @@
             <div class="steps">
                 <div class="step">
                     <span class="step-icon">📄</span>
-                    <div>打開 <strong>menu.html</strong></div>
+                    <div>打開 <strong>menu.html</strong> 或 <strong>index.html</strong></div>
                 </div>
                 <div class="step">
                     <span class="step-icon">👆</span>
-                    <div>點擊任一學生卡片</div>
+                    <div>點擊任一學生卡片（共24位）</div>
                 </div>
                 <div class="step">
                     <span class="step-icon">🎉</span>
@@ -263,28 +280,33 @@
                 </div>
             </div>
 
-            <div class="url-examples">
-                <div class="url-card">
-                    <h3>🐻 王小明</h3>
-                    <code>index_simple.html?id=student1</code>
-                    <div style="margin-top: 10px;">
-                        <a href="index_simple.html?id=student1" class="button-demo">查看</a>
-                    </div>
-                </div>
-                <div class="url-card">
-                    <h3>🎨 李小華</h3>
-                    <code>index_simple.html?id=student2</code>
-                    <div style="margin-top: 10px;">
-                        <a href="index_simple.html?id=student2" class="button-demo">查看</a>
-                    </div>
-                </div>
-                <div class="url-card">
-                    <h3>✨ 陳小美</h3>
-                    <code>index_simple.html?id=student3</code>
-                    <div style="margin-top: 10px;">
-                        <a href="index_simple.html?id=student3" class="button-demo">查看</a>
-                    </div>
-                </div>
+            <h3 style="color: #1976D2; margin: 25px 0 15px 0;">📋 所有學生列表（共24位）</h3>
+            
+            <div class="student-list">
+                <div class="student-item"><strong>01.</strong> 蕭方柔 🐵<br><code>?id=student1</code></div>
+                <div class="student-item"><strong>02.</strong> 張品卉 🎨<br><code>?id=student2</code></div>
+                <div class="student-item"><strong>03.</strong> 馬維彤 ✨<br><code>?id=student3</code></div>
+                <div class="student-item"><strong>04.</strong> 黃品瑄 🌸<br><code>?id=student4</code></div>
+                <div class="student-item"><strong>05.</strong> 楊壹壹 🦋<br><code>?id=student5</code></div>
+                <div class="student-item"><strong>06.</strong> 羅安 💫<br><code>?id=student6</code></div>
+                <div class="student-item"><strong>07.</strong> 劉彥秀 🎭<br><code>?id=student7</code></div>
+                <div class="student-item"><strong>08.</strong> 丁若羚 🌺<br><code>?id=student8</code></div>
+                <div class="student-item"><strong>09.</strong> 林映辰 🌈<br><code>?id=student9</code></div>
+                <div class="student-item"><strong>10.</strong> 王瑀彤 🌻<br><code>?id=student10</code></div>
+                <div class="student-item"><strong>11.</strong> 許安 🎪<br><code>?id=student11</code></div>
+                <div class="student-item"><strong>12.</strong> 許子芸 🎯<br><code>?id=student12</code></div>
+                <div class="student-item"><strong>13.</strong> 林品彤 💐<br><code>?id=student13</code></div>
+                <div class="student-item"><strong>14.</strong> 陳頣樂 ⭐<br><code>?id=student14</code></div>
+                <div class="student-item"><strong>15.</strong> 吳姵諭 🐍<br><code>?id=student15</code></div>
+                <div class="student-item"><strong>16.</strong> 江明曦 🎬<br><code>?id=student16</code></div>
+                <div class="student-item"><strong>17.</strong> 林曉黎 🎤<br><code>?id=student17</code></div>
+                <div class="student-item"><strong>18.</strong> 簡妤庭 🎧<br><code>?id=student18</code></div>
+                <div class="student-item"><strong>19.</strong> 莊加安 🎹<br><code>?id=student19</code></div>
+                <div class="student-item"><strong>20.</strong> 蔡汶佑 🎸<br><code>?id=student20</code></div>
+                <div class="student-item"><strong>21.</strong> 邱子熙 🎻<br><code>?id=student21</code></div>
+                <div class="student-item"><strong>22.</strong> 李玨潤 🦖<br><code>?id=student22</code></div>
+                <div class="student-item"><strong>23.</strong> 林書歆 🐑<br><code>?id=student23</code></div>
+                <div class="student-item"><strong>24.</strong> 孫以澄 🐮<br><code>?id=student24</code></div>
             </div>
 
             <div class="highlight">
@@ -306,7 +328,7 @@
                 </div>
                 <div class="step">
                     <span class="step-icon">🔍</span>
-                    <div>找到第 450 行左右的 <code>getStudentId()</code> 函數</div>
+                    <div>找到 <code>getStudentId()</code> 函數</div>
                 </div>
                 <div class="step">
                     <span class="step-icon">✏️</span>
@@ -317,7 +339,7 @@
             <div class="code-box">
 function getStudentId() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id') || 'student1';  ← 改成 'student2' 或 'student3'
+    return urlParams.get('id') || 'student1';  ← 改成 'student2' 到 'student24'
 }
             </div>
 
@@ -327,9 +349,9 @@ function getStudentId() {
         </div>
 
         <!-- QR Code 說明 -->
-        <div class="method" style="background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%); border-color: #ffc107;">
-            <h2 style="color: #f57c00;">
-                <span class="method-number" style="background: #f57c00;">📱</span>
+        <div class="method" style="background: linear-gradient(135deg, #E3F2FD 0%, #ffffff 100%); border-color: #4A90E2;">
+            <h2 style="color: #1976D2;">
+                <span class="method-number" style="background: #4A90E2;">📱</span>
                 如何製作 QR Code
             </h2>
 
@@ -353,19 +375,19 @@ function getStudentId() {
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
-                <p style="color: #f57c00; font-weight: bold; font-size: 18px;">
+                <p style="color: #1976D2; font-weight: bold; font-size: 18px;">
                     ✨ 每位學生都可以有自己專屬的 QR Code！
                 </p>
             </div>
         </div>
 
         <!-- 總結 -->
-        <div style="background: linear-gradient(135deg, #e8f4f8 0%, #ffffff 100%); padding: 30px; border-radius: 15px; margin-top: 40px;">
-            <h2 style="color: #667eea; text-align: center; margin-bottom: 20px;">📚 完整檔案列表</h2>
+        <div style="background: linear-gradient(135deg, #E3F2FD 0%, #ffffff 100%); padding: 30px; border-radius: 15px; margin-top: 40px;">
+            <h2 style="color: #1976D2; text-align: center; margin-bottom: 20px;">📚 完整檔案列表</h2>
             <div class="steps">
                 <div class="step">
                     <span class="step-icon">🏠</span>
-                    <div><strong>menu.html</strong> - 選單頁面（首頁）</div>
+                    <div><strong>index.html / menu.html</strong> - 選單頁面（首頁）</div>
                 </div>
                 <div class="step">
                     <span class="step-icon">🎨</span>
@@ -373,23 +395,27 @@ function getStudentId() {
                 </div>
                 <div class="step">
                     <span class="step-icon">📖</span>
-                    <div><strong>README.md</strong> - 詳細使用說明</div>
+                    <div><strong>quick-start.html</strong> - 快速開始指南（本頁面）</div>
                 </div>
                 <div class="step">
                     <span class="step-icon">📁</span>
-                    <div><strong>MODELS/</strong> - 存放所有 GLB 模型檔案的資料夾</div>
+                    <div><strong>MODELS/</strong> - 存放所有 GLB 模型檔案的資料夾（01.glb ~ 24.glb）</div>
+                </div>
+                <div class="step">
+                    <span class="step-icon">🖼️</span>
+                    <div><strong>MODELS/background.jpg</strong> - 背景圖片（選用）</div>
                 </div>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-            <h3 style="color: #667eea; margin-bottom: 15px;">🎉 準備好了嗎？</h3>
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #E3F2FD; border-radius: 10px;">
+            <h3 style="color: #1976D2; margin-bottom: 15px;">🎉 準備好了嗎？</h3>
             <p style="color: #666; margin-bottom: 20px;">選擇一個方法開始展示您的學生作品吧！</p>
             <div>
                 <a href="menu.html" class="button-demo">📋 開啟選單</a>
-                <a href="index_simple.html?id=student1" class="button-demo">🐻 王小明</a>
-                <a href="index_simple.html?id=student2" class="button-demo">🎨 李小華</a>
-                <a href="index_simple.html?id=student3" class="button-demo">✨ 陳小美</a>
+                <a href="index_simple.html?id=student1" class="button-demo">🐵 蕭方柔</a>
+                <a href="index_simple.html?id=student22" class="button-demo">🦖 李玨潤</a>
+                <a href="index_simple.html?id=student24" class="button-demo">🐮 孫以澄</a>
             </div>
         </div>
     </div>

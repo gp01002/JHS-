@@ -63,7 +63,12 @@
         .model-container {
             width: 100%;
             height: 500px;
+            /* 預設漸層背景 */
             background: linear-gradient(to bottom, #E3F2FD 0%, #BBDEFB 100%);
+            /* 背景圖片會由 JavaScript 動態設置 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             position: relative;
         }
 
@@ -380,19 +385,21 @@
     </div>
 
     <script>
-        // 學生資料設定 - 共21位學生
+        // 學生資料設定 - 共24位學生（已修正所有名字）
         const studentsData = {
             'student1': {
-                name: '楊壹壹',
+                name: '蕭方柔',
                 model: 'MODELS/01.glb',
+                background: 'MODELS/background-01.jpg',
                 speeches: [
-                    { text: '大家好，我是楊壹壹，這是我的3D作品', type: 'left' },
-                    { text: '希望大家喜歡！', type: 'right', decoration: '🦋' }
+                    { text: '大家好，我是蕭方柔，這是我的3D作品', type: 'left' },
+                    { text: '希望大家喜歡！', type: 'right', decoration: '🐵' }
                 ]
             },
             'student2': {
                 name: '張品卉',
                 model: 'MODELS/02.glb',
+                background: 'MODELS/background-02.jpg',
                 speeches: [
                     { text: '嗨！我是張品卉，這是我設計的作品', type: 'left' },
                     { text: '謝謝大家觀賞！', type: 'right', decoration: '🎨' }
@@ -401,6 +408,7 @@
             'student3': {
                 name: '馬維彤',
                 model: 'MODELS/03.glb',
+                background: 'MODELS/background-03.jpg',
                 speeches: [
                     { text: '我是馬維彤，這是我的創意作品', type: 'left' },
                     { text: '希望能帶給大家驚喜', type: 'right', decoration: '✨' }
@@ -409,22 +417,25 @@
             'student4': {
                 name: '黃品瑄',
                 model: 'MODELS/04.glb',
+                background: 'MODELS/background-04.jpg',
                 speeches: [
                     { text: '大家好，我是黃品瑄，這是我的作品', type: 'left' },
                     { text: '請多多指教！', type: 'right', decoration: '🌸' }
                 ]
             },
             'student5': {
-                name: '陳頤樂',
+                name: '楊壹壹',
                 model: 'MODELS/05.glb',
+                background: 'MODELS/background-05.jpg',
                 speeches: [
-                    { text: '嗨！我是陳頤樂，這是我的3D創作', type: 'left' },
-                    { text: '希望大家會喜歡！', type: 'right', decoration: '🌟' }
+                    { text: '嗨！我是楊壹壹，這是我的3D創作', type: 'left' },
+                    { text: '希望大家會喜歡！', type: 'right', decoration: '🦋' }
                 ]
             },
             'student6': {
                 name: '羅安',
                 model: 'MODELS/06.glb',
+                background: 'MODELS/background-06.jpg',
                 speeches: [
                     { text: '大家好，我是羅安，這是我的作品', type: 'left' },
                     { text: '謝謝觀賞！', type: 'right', decoration: '💫' }
@@ -433,22 +444,25 @@
             'student7': {
                 name: '劉彥秀',
                 model: 'MODELS/07.glb',
+                background: 'MODELS/background-07.jpg',
                 speeches: [
                     { text: '我是劉彥秀，這是我設計的3D模型', type: 'left' },
                     { text: '希望大家喜歡我的作品！', type: 'right', decoration: '🎭' }
                 ]
             },
             'student8': {
-                name: '丁洛菱',
+                name: '丁若羚',
                 model: 'MODELS/08.glb',
+                background: 'MODELS/background-08.jpg',
                 speeches: [
-                    { text: '嗨！我是丁洛菱，這是我的創意設計', type: 'left' },
+                    { text: '嗨！我是丁若羚，這是我的創意設計', type: 'left' },
                     { text: '請多多指教！', type: 'right', decoration: '🌺' }
                 ]
             },
             'student9': {
                 name: '林映辰',
                 model: 'MODELS/09.glb',
+                background: 'MODELS/background-09.jpg',
                 speeches: [
                     { text: '大家好，我是林映辰，這是我的作品', type: 'left' },
                     { text: '希望能帶給大家驚喜！', type: 'right', decoration: '🌈' }
@@ -457,6 +471,7 @@
             'student10': {
                 name: '王瑀彤',
                 model: 'MODELS/10.glb',
+                background: 'MODELS/background-10.jpg',
                 speeches: [
                     { text: '大家好，我是王瑀彤，這是我的3D作品', type: 'left' },
                     { text: '希望大家喜歡！', type: 'right', decoration: '🌻' }
@@ -465,6 +480,7 @@
             'student11': {
                 name: '許安',
                 model: 'MODELS/11.glb',
+                background: 'MODELS/background-11.jpg',
                 speeches: [
                     { text: '嗨！我是許安，這是我設計的作品', type: 'left' },
                     { text: '謝謝大家觀賞！', type: 'right', decoration: '🎪' }
@@ -473,6 +489,7 @@
             'student12': {
                 name: '許子芸',
                 model: 'MODELS/12.glb',
+                background: 'MODELS/background-12.jpg',
                 speeches: [
                     { text: '我是許子芸，這是我的創意作品', type: 'left' },
                     { text: '希望能帶給大家驚喜', type: 'right', decoration: '🎯' }
@@ -481,6 +498,7 @@
             'student13': {
                 name: '林品彤',
                 model: 'MODELS/13.glb',
+                background: 'MODELS/background-13.jpg',
                 speeches: [
                     { text: '大家好，我是林品彤，這是我的作品', type: 'left' },
                     { text: '請多多指教！', type: 'right', decoration: '💐' }
@@ -489,22 +507,25 @@
             'student14': {
                 name: '陳頣樂',
                 model: 'MODELS/14.glb',
+                background: 'MODELS/background-14.jpg',
                 speeches: [
                     { text: '嗨！我是陳頣樂，這是我的3D創作', type: 'left' },
                     { text: '希望大家會喜歡！', type: 'right', decoration: '⭐' }
                 ]
             },
             'student15': {
-                name: '蔡汶祐',
+                name: '吳姵諭',
                 model: 'MODELS/15.glb',
+                background: 'MODELS/background-15.jpg',
                 speeches: [
-                    { text: '大家好，我是蔡汶祐，這是我的作品', type: 'left' },
-                    { text: '謝謝觀賞！', type: 'right', decoration: '🎵' }
+                    { text: '大家好，我是吳姵諭，這是我的作品', type: 'left' },
+                    { text: '謝謝觀賞！', type: 'right', decoration: '🐍' }
                 ]
             },
             'student16': {
                 name: '江明曦',
                 model: 'MODELS/16.glb',
+                background: 'MODELS/background-16.jpg',
                 speeches: [
                     { text: '我是江明曦，這是我設計的3D模型', type: 'left' },
                     { text: '希望大家喜歡我的作品！', type: 'right', decoration: '🎬' }
@@ -513,41 +534,73 @@
             'student17': {
                 name: '林曉黎',
                 model: 'MODELS/17.glb',
+                background: 'MODELS/background-17.jpg',
                 speeches: [
                     { text: '嗨！我是林曉黎，這是我的創意設計', type: 'left' },
                     { text: '請多多指教！', type: 'right', decoration: '🎤' }
                 ]
             },
             'student18': {
-                name: '吳珮鈺',
+                name: '簡妤庭',
                 model: 'MODELS/18.glb',
+                background: 'MODELS/background-18.jpg',
                 speeches: [
-                    { text: '大家好，我是吳珮鈺，這是我的作品', type: 'left' },
+                    { text: '大家好，我是簡妤庭，這是我的作品', type: 'left' },
                     { text: '希望能帶給大家驚喜！', type: 'right', decoration: '🎧' }
                 ]
             },
             'student19': {
                 name: '莊加安',
                 model: 'MODELS/19.glb',
+                background: 'MODELS/background-19.jpg',
                 speeches: [
                     { text: '大家好，我是莊加安，這是我的3D作品', type: 'left' },
                     { text: '希望大家喜歡！', type: 'right', decoration: '🎹' }
                 ]
             },
             'student20': {
-                name: '羅安',
+                name: '蔡汶佑',
                 model: 'MODELS/20.glb',
+                background: 'MODELS/background-20.jpg',
                 speeches: [
-                    { text: '嗨！我是羅安，這是我設計的作品', type: 'left' },
+                    { text: '嗨！我是蔡汶佑，這是我設計的作品', type: 'left' },
                     { text: '謝謝大家觀賞！', type: 'right', decoration: '🎸' }
                 ]
             },
             'student21': {
                 name: '邱子熙',
                 model: 'MODELS/21.glb',
+                background: 'MODELS/background-21.jpg',
                 speeches: [
                     { text: '我是邱子熙，這是我的創意作品', type: 'left' },
                     { text: '希望能帶給大家驚喜', type: 'right', decoration: '🎻' }
+                ]
+            },
+            'student22': {
+                name: '李玨潤',
+                model: 'MODELS/22.glb',
+                background: 'MODELS/background-22.jpg',
+                speeches: [
+                    { text: '大家好，我是李玨潤，這是我的3D作品', type: 'left' },
+                    { text: '希望大家喜歡！', type: 'right', decoration: '🦖' }
+                ]
+            },
+            'student23': {
+                name: '林書歆',
+                model: 'MODELS/23.glb',
+                background: 'MODELS/background-23.jpg',
+                speeches: [
+                    { text: '嗨！我是林書歆，這是我設計的作品', type: 'left' },
+                    { text: '謝謝大家觀賞！', type: 'right', decoration: '🐑' }
+                ]
+            },
+            'student24': {
+                name: '孫以澄',
+                model: 'MODELS/24.glb',
+                background: 'MODELS/background-24.jpg',
+                speeches: [
+                    { text: '我是孫以澄，這是我的創意作品', type: 'left' },
+                    { text: '希望能帶給大家驚喜', type: 'right', decoration: '🐮' }
                 ]
             }
         };
@@ -579,6 +632,13 @@
 
             document.getElementById('studentName').textContent = studentData.name;
             displaySpeechBubbles(studentData.speeches);
+            
+            // 設置背景圖片
+            const modelContainer = document.getElementById('modelContainer');
+            if (studentData.background) {
+                modelContainer.style.backgroundImage = `url('${studentData.background}')`;
+            }
+            
             loadModel(studentData.model);
         }
 

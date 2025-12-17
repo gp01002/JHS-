@@ -1,286 +1,128 @@
-# 🎉 21位學生完整版 - 使用說明
+# 🎨 24個背景版本 - 完整檔案清單
 
-## ✅ 已完成！
-
-我已經幫你做好包含全部 **21位學生** 的完整系統了！
+## ✅ 全部4個檔案都準備好了！
 
 ---
 
-## 📋 完整學生名單（21位）
+## 📦 需要下載的檔案（共4個）
 
-### 原有學生（01-09）：
-1. 楊壹壹 🦋 - MODELS/01.glb
-2. 張品卉 🎨 - MODELS/02.glb
-3. 馬維彤 ✨ - MODELS/03.glb
-4. 黃品瑄 🌸 - MODELS/04.glb
-5. 陳頤樂 🌟 - MODELS/05.glb
-6. 羅安 💫 - MODELS/06.glb
-7. 劉彥秀 🎭 - MODELS/07.glb
-8. 丁洛菱 🌺 - MODELS/08.glb
-9. 林映辰 🌈 - MODELS/09.glb
+### 1️⃣ [index_24backgrounds_final.html](computer:///mnt/user-data/outputs/index_24backgrounds_final.html)
+- **用途**：首頁選單
+- **上傳後改名為**：`index.html`
 
-### 新增學生（10-21）：
-10. 王瑀彤 🌻 - MODELS/10.glb ⭐ NEW
-11. 許安 🎪 - MODELS/11.glb ⭐ NEW
-12. 許子芸 🎯 - MODELS/12.glb ⭐ NEW
-13. 林品彤 💐 - MODELS/13.glb ⭐ NEW
-14. 陳頣樂 ⭐ - MODELS/14.glb ⭐ NEW
-15. 蔡汶祐 🎵 - MODELS/15.glb ⭐ NEW
-16. 江明曦 🎬 - MODELS/16.glb ⭐ NEW
-17. 林曉黎 🎤 - MODELS/17.glb ⭐ NEW
-18. 吳珮鈺 🎧 - MODELS/18.glb ⭐ NEW
-19. 莊加安 🎹 - MODELS/19.glb ⭐ NEW
-20. 羅安 🎸 - MODELS/20.glb ⭐ NEW
-21. 邱子熙 🎻 - MODELS/21.glb ⭐ NEW
+### 2️⃣ [index_simple_24backgrounds.html](computer:///mnt/user-data/outputs/index_simple_24backgrounds.html) ⭐ 重點
+- **用途**：作品展示頁（**支援24個不同背景**）
+- **上傳後改名為**：`index_simple.html`
+
+### 3️⃣ [menu_24backgrounds_final.html](computer:///mnt/user-data/outputs/menu_24backgrounds_final.html)
+- **用途**：選單頁面
+- **上傳後改名為**：`menu.html`
+
+### 4️⃣ [quick-start_24backgrounds_final.html](computer:///mnt/user-data/outputs/quick-start_24backgrounds_final.html)
+- **用途**：快速入門指南
+- **上傳後改名為**：`quick-start.html`
 
 ---
 
-## 📦 你需要下載的檔案（3個）
+## 🖼️ 背景圖片命名
 
-### 主要檔案：
-1. **[index_21students.html](computer:///mnt/user-data/outputs/index_21students.html)**
-   - 首頁（選單）
-   - 上傳後改名為：`index.html`
-
-2. **[index_simple_21students.html](computer:///mnt/user-data/outputs/index_simple_21students.html)**
-   - 作品展示頁
-   - 上傳後改名為：`index_simple.html`
-
-3. **[menu_21students.html](computer:///mnt/user-data/outputs/menu_21students.html)**
-   - 選單頁面
-   - 上傳後改名為：`menu.html`
-
----
-
-## 📂 你需要上傳的模型檔案
-
-### ⚠️ 重要：把這些檔案放進 MODELS 資料夾
-
-**請確認以下檔案都在 `MODELS/` 資料夾裡：**
-
-#### 已有的（01-09）：
-- ✅ 01.glb ~ 09.glb
-
-#### 需要上傳的（10-21）：
-- ⭐ 10.glb（王瑀彤）
-- ⭐ 11.glb（許安）
-- ⭐ 12.glb（許子芸）
-- ⭐ 13.glb（林品彤）
-- ⭐ 14.glb（陳頣樂）
-- ⭐ 15.glb（蔡汶祐）
-- ⭐ 16.glb（江明曦）
-- ⭐ 17.glb（林曉黎）
-- ⭐ 18.glb（吳珮鈺）
-- ⭐ 19.glb（莊加安）
-- ⭐ 20.glb（羅安）
-- ⭐ 21.glb（邱子熙）
-
----
-
-## 🚀 完整上傳步驟
-
-### 步驟1️⃣：上傳模型檔案到 MODELS
-
-1. 在 GitHub 點擊 **MODELS** 資料夾
-2. 點擊 **"Add file"** → **"Upload files"**
-3. 把 `10.glb` 到 `21.glb` 全部拖進去
-4. 輸入訊息：`新增學生 10-21 的作品`
-5. 點擊 **"Commit changes"**
-
-### 步驟2️⃣：刪除舊的 HTML 檔案
-
-刪除：
-- ❌ `index.html`
-- ❌ `index_simple.html`
-- ❌ `menu.html`
-
-### 步驟3️⃣：上傳新的 HTML 檔案
-
-上傳：
-- ✅ `index_21students.html`
-- ✅ `index_simple_21students.html`
-- ✅ `menu_21students.html`
-
-### 步驟4️⃣：重新命名（⚠️ 很重要！）
-
-把檔名改成：
-- `index_21students.html` → `index.html`
-- `index_simple_21students.html` → `index_simple.html`
-- `menu_21students.html` → `menu.html`
-
-### 步驟5️⃣：確認 LOGO
-
-檢查 `MODELS/00.png` 是否存在
-
-### 步驟6️⃣：測試
-
-等待 1-2 分鐘後，開啟：
+### 檔名：
 ```
-首頁：https://gp01002.github.io/JHS-/
-作品：https://gp01002.github.io/JHS-/index_simple.html?id=student10
+background-01.jpg → 蕭方柔
+background-02.jpg → 張品卉
+background-03.jpg → 馬維彤
+...
+background-24.jpg → 孫以澄
+```
+
+### 位置：
+```
+全部放在 MODELS/ 資料夾
 ```
 
 ---
 
-## 🔲 所有學生的 QR Code 網址
+## 🚀 上傳步驟
 
-### 基礎網址：
-```
-https://gp01002.github.io/JHS-/index_simple.html
-```
+### 步驟1：上傳背景圖片（24張）
+→ 到 MODELS 資料夾上傳 background-01.jpg ~ background-24.jpg
 
-### 每位學生的完整網址：
+### 步驟2：刪除舊 HTML
+→ 刪除舊的 index.html、index_simple.html、menu.html、quick-start.html
 
-#### 原有學生（01-09）：
-```
-楊壹壹：?id=student1
-張品卉：?id=student2
-馬維彤：?id=student3
-黃品瑄：?id=student4
-陳頤樂：?id=student5
-羅安：?id=student6
-劉彥秀：?id=student7
-丁洛菱：?id=student8
-林映辰：?id=student9
-```
+### 步驟3：上傳新 HTML（4個）
+→ 上傳上面4個檔案，記得改名（去掉後綴）
 
-#### 新增學生（10-21）：
-```
-王瑀彤：?id=student10
-許安：?id=student11
-許子芸：?id=student12
-林品彤：?id=student13
-陳頣樂：?id=student14
-蔡汶祐：?id=student15
-江明曦：?id=student16
-林曉黎：?id=student17
-吳珮鈺：?id=student18
-莊加安：?id=student19
-羅安：?id=student20
-邱子熙：?id=student21
-```
+### 步驟4：測試
+→ 等1-2分鐘，開啟網站測試
 
 ---
 
-## 🎨 特色功能
+## 📋 完整對照表
 
-### ✨ 全部包含：
-- ✅ 藍色主題
-- ✅ LOGO 放大 2.5 倍
-- ✅ 圓潤雲朵對話框
-- ✅ 21位學生完整支援
-- ✅ 響應式設計（手機、平板、電腦）
+| 編號 | 姓名 | 背景檔名 |
+|------|------|----------|
+| 01 | 蕭方柔 🐵 | background-01.jpg |
+| 02 | 張品卉 🎨 | background-02.jpg |
+| 03 | 馬維彤 ✨ | background-03.jpg |
+| 04 | 黃品瑄 🌸 | background-04.jpg |
+| 05 | 楊壹壹 🦋 | background-05.jpg |
+| 06 | 羅安 💫 | background-06.jpg |
+| 07 | 劉彥秀 🎭 | background-07.jpg |
+| 08 | 丁若羚 🌺 | background-08.jpg |
+| 09 | 林映辰 🌈 | background-09.jpg |
+| 10 | 王瑀彤 🌻 | background-10.jpg |
+| 11 | 許安 🎪 | background-11.jpg |
+| 12 | 許子芸 🎯 | background-12.jpg |
+| 13 | 林品彤 💐 | background-13.jpg |
+| 14 | 陳頣樂 ⭐ | background-14.jpg |
+| 15 | 吳姵諭 🐍 | background-15.jpg |
+| 16 | 江明曦 🎬 | background-16.jpg |
+| 17 | 林曉黎 🎤 | background-17.jpg |
+| 18 | 簡妤庭 🎧 | background-18.jpg |
+| 19 | 莊加安 🎹 | background-19.jpg |
+| 20 | 蔡汶佑 🎸 | background-20.jpg |
+| 21 | 邱子熙 🎻 | background-21.jpg |
+| 22 | 李玨潤 🦖 | background-22.jpg |
+| 23 | 林書歆 🐑 | background-23.jpg |
+| 24 | 孫以澄 🐮 | background-24.jpg |
 
 ---
 
-## 📂 完整檔案結構
+## 💡 彈性使用
 
-```
-你的 GitHub Repository (JHS-)
-│
-├── index.html              ← 首頁（21位學生選單）
-├── index_simple.html       ← 作品頁（21位學生）
-├── menu.html               ← 選單頁（21位學生）
-│
-└── MODELS/
-    ├── 00.png             ← LOGO
-    ├── 01.glb ~ 09.glb    ← 原有學生
-    └── 10.glb ~ 21.glb    ← 新增學生 ⭐
-```
+### 全部都要背景？
+✅ 上傳全部 24 張圖片
 
----
+### 只要部分背景？
+✅ 只上傳想要的圖片（例如：01、05、10）
+→ 沒有圖片的學生會顯示藍色漸層
 
-## ⚠️ 注意事項
-
-### 檔案命名：
-- ✅ 模型檔案必須是：`10.glb`、`11.glb`...`21.glb`
-- ✅ 都要放在 `MODELS/` 資料夾裡
-- ❌ 不能放在主資料夾
-
-### 檔案格式：
-- ✅ 必須是 `.glb` 格式
-- ✅ 建議每個檔案 < 10MB
-
-### 上傳位置：
-從你的截圖看，`10.glb`、`11.glb`、`12.glb` 在主資料夾，需要：
-1. 刪除主資料夾的這些檔案
-2. 重新上傳到 MODELS 資料夾
+### 都不要背景？
+✅ 不上傳任何背景圖片
+→ 全部顯示藍色漸層
 
 ---
 
 ## ✅ 檢查清單
 
-### 上傳前：
-- [ ] 下載 3 個 HTML 檔案（index、index_simple、menu）
-- [ ] 準備好 10.glb ~ 21.glb（共12個檔案）
-- [ ] 確認 MODELS/00.png（LOGO）存在
-- [ ] 確認 MODELS/01.glb ~ 09.glb 存在
+上傳前：
+- [ ] 下載 4 個 HTML 檔案
+- [ ] 準備 24 張背景圖片（或部分）
+- [ ] 圖片已改名為 background-01.jpg ~ background-24.jpg
 
-### 上傳後：
-- [ ] 檔案已重新命名（去掉 _21students）
+上傳後：
+- [ ] 4 個 HTML 已改名上傳
+- [ ] 背景圖片已上傳到 MODELS
 - [ ] 等待 1-2 分鐘
-- [ ] 測試首頁能看到 21 位學生
-- [ ] 測試至少一位新學生的作品
-
-### 測試時檢查：
-- [ ] 選單顯示 21 張學生卡片
-- [ ] LOGO 正常顯示且夠大
-- [ ] 背景是藍色
-- [ ] 對話框是圓潤的
-- [ ] 每位學生的 3D 模型都能載入
+- [ ] 測試網站
 
 ---
 
-## 💡 如何生成 QR Code
+## 🎉 完成！
 
-### 方法1：線上工具
-1. 前往 https://www.qr-code-generator.com/
-2. 輸入完整網址（例如：`https://gp01002.github.io/JHS-/index_simple.html?id=student10`）
-3. 下載 QR Code
-4. 為每位學生重複此步驟
+現在你有完整的 24 背景版本了！
 
-### 方法2：批次生成
-如果你想一次生成 21 個 QR Code，我可以幫你寫一個 Python 腳本！
-
----
-
-## 🆘 常見問題
-
-### Q1: 主資料夾的 10.glb、11.glb、12.glb 怎麼辦？
-**A:** 需要移到 MODELS 資料夾：
-1. 刪除主資料夾的這些檔案
-2. 重新上傳到 MODELS 資料夾
-
-### Q2: 還需要其他檔案嗎？
-**A:** 需要：
-- 13.glb ~ 21.glb（共9個檔案）
-- 全部放進 MODELS 資料夾
-
-### Q3: 為什麼模型無法顯示？
-**A:** 檢查：
-- 檔案是否在 MODELS 資料夾
-- 檔名是否正確（10.glb 不是 10.GLB）
-- 檔案格式是否為 .glb
-
-### Q4: 選單只顯示部分學生？
-**A:** 
-- 清除瀏覽器快取（Ctrl+F5）
-- 確認已上傳新的 HTML 檔案
-- 等待 GitHub Pages 更新（1-2分鐘）
-
----
-
-## 🎉 完成後的效果
-
-- ✅ 首頁顯示 21 張學生卡片
-- ✅ 每位學生都有專屬的 QR Code
-- ✅ 掃描 QR Code 直接觀看作品
-- ✅ LOGO 大且清晰
-- ✅ 藍色主題專業美觀
-- ✅ 對話框圓潤可愛
-
----
-
-**準備好就開始上傳吧！** 🚀
-
-有任何問題隨時問我！😊
+**參考其他說明文件：**
+- 背景圖片對照表.md（查詢對應）
+- 24個背景完整說明.md（詳細說明）

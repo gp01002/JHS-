@@ -122,6 +122,22 @@
             justify-content: center;
             font-size: 42px;
             box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .student-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .student-avatar .emoji-fallback {
+            position: relative;
+            z-index: 1;
         }
 
         .student-name {
@@ -243,30 +259,30 @@
     <script>
         // 學生資料 - 共24位（已修正所有名字）
         const studentsData = {
-            'student1': { name: '蕭方柔', emoji: '🐵', id: 'student1' },
-            'student2': { name: '張品卉', emoji: '🎨', id: 'student2' },
-            'student3': { name: '馬維彤', emoji: '✨', id: 'student3' },
-            'student4': { name: '黃品瑄', emoji: '🌸', id: 'student4' },
-            'student5': { name: '楊壹壹', emoji: '🦋', id: 'student5' },
-            'student6': { name: '羅安', emoji: '💫', id: 'student6' },
-            'student7': { name: '劉彥秀', emoji: '🎭', id: 'student7' },
-            'student8': { name: '丁若羚', emoji: '🌺', id: 'student8' },
-            'student9': { name: '林映辰', emoji: '🌈', id: 'student9' },
-            'student10': { name: '王瑀彤', emoji: '🌻', id: 'student10' },
-            'student11': { name: '許安', emoji: '🎪', id: 'student11' },
-            'student12': { name: '許子芸', emoji: '🎯', id: 'student12' },
-            'student13': { name: '林品彤', emoji: '💐', id: 'student13' },
-            'student14': { name: '陳頣樂', emoji: '⭐', id: 'student14' },
-            'student15': { name: '吳姵諭', emoji: '🐍', id: 'student15' },
-            'student16': { name: '江明曦', emoji: '🎬', id: 'student16' },
-            'student17': { name: '林曉黎', emoji: '🎤', id: 'student17' },
-            'student18': { name: '簡妤庭', emoji: '🎧', id: 'student18' },
-            'student19': { name: '莊加安', emoji: '🎹', id: 'student19' },
-            'student20': { name: '蔡汶佑', emoji: '🎸', id: 'student20' },
-            'student21': { name: '邱子熙', emoji: '🎻', id: 'student21' },
-            'student22': { name: '李玨潤', emoji: '🦖', id: 'student22' },
-            'student23': { name: '林書歆', emoji: '🐑', id: 'student23' },
-            'student24': { name: '孫以澄', emoji: '🐮', id: 'student24' }
+            'student1': { name: '蕭方柔', emoji: '🐵', avatar: 'MODELS/avatars/avatar-01.png', id: 'student1' },
+            'student2': { name: '張品卉', emoji: '🎨', avatar: 'MODELS/avatars/avatar-02.png', id: 'student2' },
+            'student3': { name: '馬維彤', emoji: '✨', avatar: 'MODELS/avatars/avatar-03.png', id: 'student3' },
+            'student4': { name: '黃品瑄', emoji: '🌸', avatar: 'MODELS/avatars/avatar-04.png', id: 'student4' },
+            'student5': { name: '楊壹壹', emoji: '🦋', avatar: 'MODELS/avatars/avatar-05.png', id: 'student5' },
+            'student6': { name: '羅安', emoji: '💫', avatar: 'MODELS/avatars/avatar-06.png', id: 'student6' },
+            'student7': { name: '劉彥秀', emoji: '🎭', avatar: 'MODELS/avatars/avatar-07.png', id: 'student7' },
+            'student8': { name: '丁若羚', emoji: '🌺', avatar: 'MODELS/avatars/avatar-08.png', id: 'student8' },
+            'student9': { name: '林映辰', emoji: '🌈', avatar: 'MODELS/avatars/avatar-09.png', id: 'student9' },
+            'student10': { name: '王瑀彤', emoji: '🌻', avatar: 'MODELS/avatars/avatar-10.png', id: 'student10' },
+            'student11': { name: '許安', emoji: '🎪', avatar: 'MODELS/avatars/avatar-11.png', id: 'student11' },
+            'student12': { name: '許子芸', emoji: '🎯', avatar: 'MODELS/avatars/avatar-12.png', id: 'student12' },
+            'student13': { name: '林品彤', emoji: '💐', avatar: 'MODELS/avatars/avatar-13.png', id: 'student13' },
+            'student14': { name: '陳頣樂', emoji: '⭐', avatar: 'MODELS/avatars/avatar-14.png', id: 'student14' },
+            'student15': { name: '吳姵諭', emoji: '🐍', avatar: 'MODELS/avatars/avatar-15.png', id: 'student15' },
+            'student16': { name: '江明曦', emoji: '🎬', avatar: 'MODELS/avatars/avatar-16.png', id: 'student16' },
+            'student17': { name: '林曉黎', emoji: '🎤', avatar: 'MODELS/avatars/avatar-17.png', id: 'student17' },
+            'student18': { name: '簡妤庭', emoji: '🎧', avatar: 'MODELS/avatars/avatar-18.png', id: 'student18' },
+            'student19': { name: '莊加安', emoji: '🎹', avatar: 'MODELS/avatars/avatar-19.png', id: 'student19' },
+            'student20': { name: '蔡汶佑', emoji: '🎸', avatar: 'MODELS/avatars/avatar-20.png', id: 'student20' },
+            'student21': { name: '邱子熙', emoji: '🎻', avatar: 'MODELS/avatars/avatar-21.png', id: 'student21' },
+            'student22': { name: '李玨潤', emoji: '🦖', avatar: 'MODELS/avatars/avatar-22.png', id: 'student22' },
+            'student23': { name: '林書歆', emoji: '🐑', avatar: 'MODELS/avatars/avatar-23.png', id: 'student23' },
+            'student24': { name: '孫以澄', emoji: '🐮', avatar: 'MODELS/avatars/avatar-24.png', id: 'student24' }
         };
 
         function generateStudentCards() {
@@ -277,8 +293,19 @@
                 card.className = 'student-card';
                 card.onclick = () => viewStudent(student.id);
                 
+                // 創建頭像HTML（支援圖片和emoji回退）
+                const avatarHTML = `
+                    <div class="student-avatar" id="avatar-${student.id}">
+                        <img src="${student.avatar}" 
+                             alt="${student.name}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                             onload="this.nextElementSibling.style.display='none';">
+                        <span class="emoji-fallback" style="display:none;">${student.emoji}</span>
+                    </div>
+                `;
+                
                 card.innerHTML = `
-                    <div class="student-avatar">${student.emoji}</div>
+                    ${avatarHTML}
                     <div class="student-name">${student.name}</div>
                     <div class="student-id">學生ID: ${student.id}</div>
                     <button class="view-button" onclick="viewStudent('${student.id}'); event.stopPropagation();">

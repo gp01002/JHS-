@@ -827,6 +827,9 @@
                 if (loadCount === 2) {
                     setTimeout(() => {
                         loadingOverlay.classList.add('hidden');
+                        
+                        // 檢查並播放兩個模型的動畫
+                        setupDualModelAnimations(viewer1, viewer2);
                     }, 500);
                 }
             };
@@ -834,8 +837,35 @@
             viewer1.addEventListener('load', onLoad);
             viewer2.addEventListener('load', onLoad);
             
-            // 雙模型不設置動畫控制
+            // 雙模型隱藏動畫控制按鈕
             animationControls.style.display = 'none';
+        }
+
+        // 設置雙模型動畫
+        function setupDualModelAnimations(viewer1, viewer2) {
+            try {
+                // 第一隻羊的動畫
+                const animations1 = viewer1.availableAnimations;
+                if (animations1 && animations1.length > 0) {
+                    viewer1.animationName = animations1[0];
+                    setTimeout(() => {
+                        viewer1.play();
+                        console.log('✅ 第一隻羊開始播放動畫');
+                    }, 300);
+                }
+                
+                // 第二隻羊的動畫
+                const animations2 = viewer2.availableAnimations;
+                if (animations2 && animations2.length > 0) {
+                    viewer2.animationName = animations2[0];
+                    setTimeout(() => {
+                        viewer2.play();
+                        console.log('✅ 第二隻羊開始播放動畫');
+                    }, 300);
+                }
+            } catch (error) {
+                console.error('雙模型動畫設置失敗:', error);
+            }
         }
 
         // 設置點擊互動

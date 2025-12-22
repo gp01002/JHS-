@@ -70,6 +70,65 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* 雙模型容器 */
+        .model-container.dual-model {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .model-container.dual-model model-viewer {
+            width: 48% !important;
+            height: 100% !important;
+        }
+
+        /* 互動圖標動畫 */
+        .interaction-icon {
+            position: absolute;
+            font-size: 40px;
+            pointer-events: none;
+            animation: floatUp 1.5s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-80px) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-150px) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* 點擊波紋效果 */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            animation: ripple-animation 0.6s ease-out;
+        }
+
+        @keyframes ripple-animation {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
         model-viewer {
@@ -391,15 +450,17 @@
                 name: '蕭方柔',
                 model: 'MODELS/01.glb',
                 background: 'MODELS/background-01.jpg',
+                interactionIcon: '🌸',
                 speeches: [
-                    { text: '大家好，我是依依，我住在一座溫暖的闊葉林裡，最喜歡棉花糖和在森林裡作畫。', type: 'left' },
-                    { text: '我是一隻花心猴，希望有一天能把自己的夢想變成真的。', type: 'right', decoration: '🐵' }
+                    { text: '我是 蕭方柔，我是角色是一隻花心猴', type: 'left' },
+                    { text: '希望有一天能把自己的夢想變成真的。', type: 'right', decoration: '🐵' }
                 ]
             },
             'student2': {
                 name: '張品卉',
                 model: 'MODELS/02.glb',
                 background: 'MODELS/background-02.jpg',
+                interactionIcon: '🍪',
                 speeches: [
                     { text: '我是張品卉，我的角色是一隻博士兔，視力非常好。', type: 'left' },
                     { text: '我最喜歡黃色和藍色的馬卡龍，因為那能讓我看得更清楚。', type: 'right', decoration: '🎨' }
@@ -409,6 +470,7 @@
                 name: '馬維彤',
                 model: 'MODELS/03.glb',
                 background: 'MODELS/background-03.jpg',
+                interactionIcon: '🎨',
                 speeches: [
                     { text: '我是馬維彤，我的角色叫 Day Day，生活在一個資訊很多、不斷變化的世界裡。', type: 'left' },
                     { text: '我的願望是把這個世界，變成我喜歡的樣子。', type: 'right', decoration: '✨' }
@@ -418,6 +480,7 @@
                 name: '黃品瑄',
                 model: 'MODELS/04.glb',
                 background: 'MODELS/background-04.jpg',
+                interactionIcon: '🌈',
                 speeches: [
                     { text: '我是黃品瑄，我的小美來自一個繽紛又自由的天空。', type: 'left' },
                     { text: '她會跳舞、會移動，也想邀請你一起玩。', type: 'right', decoration: '🌸' }
@@ -427,15 +490,17 @@
                 name: '楊壹壹',
                 model: 'MODELS/05.glb',
                 background: 'MODELS/background-05.jpg',
+                interactionIcon: '🌸',
                 speeches: [
-                    { text: '我是楊壹壹，我的角色是一隻小黑。', type: 'left' },
-                    { text: '我的夢想是成為一杯珍珠奶茶，讓大家都喜歡我。', type: 'right', decoration: '🦋' }
+                    { text: '我是楊壹壹，我的角色是依依。', type: 'left' },
+                    { text: '我住在一座溫暖的闊葉林裡，最喜歡棉花糖和在森林裡作畫。', type: 'right', decoration: '🦋' }
                 ]
             },
             'student6': {
                 name: '羅安',
                 model: 'MODELS/06.glb',
                 background: 'MODELS/background-06.jpg',
+                interactionIcon: '☁️',
                 speeches: [
                     { text: '我是羅安，我今年六百歲，但我早就不在乎年齡了。', type: 'left' },
                     { text: '我住在綠色的雲裡，喜歡誇張又快速的動作。', type: 'right', decoration: '💫' }
@@ -445,6 +510,7 @@
                 name: '劉彥秀',
                 model: 'MODELS/07.glb',
                 background: 'MODELS/background-07.jpg',
+                interactionIcon: '🍌',
                 speeches: [
                     { text: '我是劉彥秀，我喜歡蒐集世界各地不同品種的水果。', type: 'left' },
                     { text: '每一種水果的味道，都像是一個不一樣的故事。', type: 'right', decoration: '🎭' }
@@ -454,6 +520,7 @@
                 name: '丁若羚',
                 model: 'MODELS/08.glb',
                 background: 'MODELS/background-08.jpg',
+                interactionIcon: '⚡',
                 speeches: [
                     { text: '我是丁若羚，我的角色很有彈性，會慢慢長大。', type: 'left' },
                     { text: '當大家一起變得更強時，我也會跟著改變。', type: 'right', decoration: '🌺' }
@@ -463,6 +530,7 @@
                 name: '林映辰',
                 model: 'MODELS/09.glb',
                 background: 'MODELS/background-09.jpg',
+                interactionIcon: '🌺',
                 speeches: [
                     { text: '我是林映辰，我的角色來自花與色彩構成的世界。', type: 'left' },
                     { text: '只要尾巴被碰到，整個世界都會產生反應。', type: 'right', decoration: '🌈' }
@@ -472,6 +540,7 @@
                 name: '王瑀彤',
                 model: 'MODELS/10.glb',
                 background: 'MODELS/background-10.jpg',
+                interactionIcon: '🥕',
                 speeches: [
                     { text: '我是王瑀彤，我的角色是一隻會不斷伸縮的兔子。', type: 'left' },
                     { text: '我喜歡拉長身體去找胡蘿蔔，也找真正的自己。', type: 'right', decoration: '🌻' }
@@ -481,6 +550,7 @@
                 name: '許安',
                 model: 'MODELS/11.glb',
                 background: 'MODELS/background-11.jpg',
+                interactionIcon: '⬛',
                 speeches: [
                     { text: '我是許安，我是一頭來自異世界的方牛。', type: 'left' },
                     { text: '我住在方塊農場，最喜歡吃方糖。', type: 'right', decoration: '🎪' }
@@ -490,8 +560,9 @@
                 name: '許子芸',
                 model: 'MODELS/12.glb',
                 background: 'MODELS/background-12.jpg',
+                interactionIcon: '👠',
                 speeches: [
-                    { text: '我是許子芸，我的外型看起來很強壯，其實最喜歡跳舞。', type: 'left' },
+                    { text: '我是許子芸，我的角色叫碧虎，其實最喜歡跳舞。', type: 'left' },
                     { text: '就算時間改變，我也會用舞步記住自己。', type: 'right', decoration: '🎯' }
                 ]
             },
@@ -499,15 +570,17 @@
                 name: '林品彤',
                 model: 'MODELS/13.glb',
                 background: 'MODELS/background-13.jpg',
+                interactionIcon: '🔥',
                 speeches: [
                     { text: '我是林品彤，我是一隻丹丹。', type: 'left' },
-                    { text: '有一天我變成了北極熊，在火烤老虎的世界裡轉頭把火吹滅。', type: 'right', decoration: '💐' }
+                    { text: '火烤老虎的世界裡轉頭把火吹滅。', type: 'right', decoration: '💐' }
                 ]
             },
             'student14': {
                 name: '陳頣樂',
                 model: 'MODELS/14.glb',
                 background: 'MODELS/background-14.jpg',
+                interactionIcon: '✨',
                 speeches: [
                     { text: '我是陳頣樂，我是一隻來自四次元空間的快樂鼠。', type: 'left' },
                     { text: '我最喜歡波動和互動，因為那代表世界還在動。', type: 'right', decoration: '⭐' }
@@ -517,6 +590,7 @@
                 name: '吳姵諭',
                 model: 'MODELS/15.glb',
                 background: 'MODELS/background-15.jpg',
+                interactionIcon: '🍃',
                 speeches: [
                     { text: '我是吳姵諭，我叫風。', type: 'left' },
                     { text: '我是一位服裝設計師，把森林變成布料，把破損變成新的衣服。', type: 'right', decoration: '🐍' }
@@ -526,6 +600,7 @@
                 name: '江明曦',
                 model: 'MODELS/16.glb',
                 background: 'MODELS/background-16.jpg',
+                interactionIcon: '🥚',
                 speeches: [
                     { text: '我是江明曦，我是一隻科學雞，覺得這個世界其實很危險。', type: 'left' },
                     { text: '所以我發明了一件衣服，用來保護自己。', type: 'right', decoration: '🎬' }
@@ -535,17 +610,19 @@
                 name: '林曉黎',
                 model: 'MODELS/17.glb',
                 background: 'MODELS/background-17.jpg',
+                interactionIcon: '🐚',
                 speeches: [
-                    { text: '我是林曉黎，我的角色看起來很真實。', type: 'left' },
-                    { text: '我把生活中的動作與表情，一點一點變成角色。', type: 'right', decoration: '🎤' }
+                    { text: '我是林曉黎，我的角色是貝殼珊瑚。', type: 'left' },
+                    { text: '他是一個實驗的動物，回到海洋後成為耀眼的明星。', type: 'right', decoration: '🎤' }
                 ]
             },
             'student18': {
                 name: '簡妤庭',
                 model: 'MODELS/18.glb',
                 background: 'MODELS/background-18.jpg',
+                interactionIcon: '💎',
                 speeches: [
-                    { text: '我是簡妤庭，我住在花海裡，也很喜歡珍珠。', type: 'left' },
+                    { text: '我是簡妤庭，我的角色叫美人。', type: 'left' },
                     { text: '你不覺得今天的天空，看起來特別漂亮嗎？', type: 'right', decoration: '🎧' }
                 ]
             },
@@ -553,8 +630,9 @@
                 name: '莊加安',
                 model: 'MODELS/19.glb',
                 background: 'MODELS/background-19.jpg',
+                interactionIcon: '👁️',
                 speeches: [
-                    { text: '我是莊加安，我的角色有兩張臉，卻只有一隻眼睛。', type: 'left' },
+                    { text: '我是莊加安，我的角色叫懶洋洋。', type: 'left' },
                     { text: '如果你找到我，也許我會陪你一起玩躲貓貓。', type: 'right', decoration: '🎹' }
                 ]
             },
@@ -562,8 +640,9 @@
                 name: '蔡汶佑',
                 model: 'MODELS/20.glb',
                 background: 'MODELS/background-20.jpg',
+                interactionIcon: '⭐',
                 speeches: [
-                    { text: '我是蔡汶佑，我喜歡安靜。', type: 'left' },
+                    { text: '我是蔡汶佑，我的角色叫呆龍。', type: 'left' },
                     { text: '我在沒有時間的宇宙裡，慢慢轉動。', type: 'right', decoration: '🎸' }
                 ]
             },
@@ -571,6 +650,7 @@
                 name: '邱子熙',
                 model: 'MODELS/21.glb',
                 background: 'MODELS/background-21.jpg',
+                interactionIcon: '⚽',
                 speeches: [
                     { text: '我是邱子熙，我是一匹阿馬。', type: 'left' },
                     { text: '我的身體會發光，但功課好像沒有那麼亮。', type: 'right', decoration: '🎻' }
@@ -580,6 +660,7 @@
                 name: '李玨潤',
                 model: 'MODELS/22.glb',
                 background: 'MODELS/background-22.jpg',
+                interactionIcon: '🎾',
                 speeches: [
                     { text: '我是李玨潤，我的角色喜歡冒險。', type: 'left' },
                     { text: '我們一起走，走到很遠很遠的地方吧。', type: 'right', decoration: '🦖' }
@@ -588,16 +669,20 @@
             'student23': {
                 name: '林書歆',
                 model: 'MODELS/23.glb',
+                model2: 'MODELS/23-2.glb',
+                dualModel: true,
                 background: 'MODELS/background-23.jpg',
+                interactionIcon: '👁️',
                 speeches: [
-                    { text: '我是林書歆，我的角色來自兩個世界之間。', type: 'left' },
-                    { text: '我的眼睛會自己轉動，看見別人看不到的地方。', type: 'right', decoration: '🐑' }
+                    { text: '我是林書歆，我的角色是雙羊。', type: 'left' },
+                    { text: '我們是上帝的僕人。', type: 'right', decoration: '🐑' }
                 ]
             },
             'student24': {
                 name: '孫以澄',
                 model: 'MODELS/24.glb',
                 background: 'MODELS/background-24.jpg',
+                interactionIcon: '🔴',
                 speeches: [
                     { text: '我是孫以澄，我是一頭草間彌牛，也是點點牛。', type: 'left' },
                     { text: '我最喜歡青藏高原，還有吃草。', type: 'right', decoration: '🐮' }
@@ -639,7 +724,15 @@
                 modelContainer.style.backgroundImage = `url('${studentData.background}')`;
             }
             
-            loadModel(studentData.model);
+            // 設置點擊互動
+            setupInteraction(studentData.interactionIcon);
+            
+            // 載入模型（單模型或雙模型）
+            if (studentData.dualModel) {
+                loadDualModel(studentData.model, studentData.model2);
+            } else {
+                loadModel(studentData.model);
+            }
         }
 
         function displaySpeechBubbles(speeches) {
@@ -693,6 +786,90 @@
             });
 
             setupControlButtons();
+        }
+
+        // 雙模型載入函數
+        function loadDualModel(modelUrl1, modelUrl2) {
+            const modelContainer = document.getElementById('modelContainer');
+            modelContainer.classList.add('dual-model');
+            
+            // 創建兩個 model-viewer
+            modelContainer.innerHTML = `
+                <model-viewer 
+                    id="modelViewer1"
+                    class="dual-viewer"
+                    camera-controls 
+                    touch-action="pan-y"
+                    auto-rotate
+                    rotation-per-second="30deg"
+                    style="width: 48%; height: 100%;">
+                </model-viewer>
+                <model-viewer 
+                    id="modelViewer2"
+                    class="dual-viewer"
+                    camera-controls 
+                    touch-action="pan-y"
+                    auto-rotate
+                    rotation-per-second="30deg"
+                    style="width: 48%; height: 100%;">
+                </model-viewer>
+            `;
+            
+            const viewer1 = document.getElementById('modelViewer1');
+            const viewer2 = document.getElementById('modelViewer2');
+            
+            viewer1.src = modelUrl1;
+            viewer2.src = modelUrl2;
+            
+            let loadCount = 0;
+            const onLoad = () => {
+                loadCount++;
+                if (loadCount === 2) {
+                    setTimeout(() => {
+                        loadingOverlay.classList.add('hidden');
+                    }, 500);
+                }
+            };
+            
+            viewer1.addEventListener('load', onLoad);
+            viewer2.addEventListener('load', onLoad);
+            
+            // 雙模型不設置動畫控制
+            animationControls.style.display = 'none';
+        }
+
+        // 設置點擊互動
+        function setupInteraction(icon) {
+            const modelContainer = document.getElementById('modelContainer');
+            
+            modelContainer.addEventListener('click', function(e) {
+                // 創建波紋效果
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                const rect = modelContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '50px';
+                ripple.style.height = '50px';
+                modelContainer.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+                
+                // 創建飄浮圖標
+                const floatIcon = document.createElement('div');
+                floatIcon.className = 'interaction-icon';
+                floatIcon.textContent = icon;
+                floatIcon.style.left = (x - 20) + 'px';
+                floatIcon.style.top = (y - 20) + 'px';
+                modelContainer.appendChild(floatIcon);
+                
+                // 隨機偏移
+                const randomX = (Math.random() - 0.5) * 60;
+                floatIcon.style.transform = `translateX(${randomX}px)`;
+                
+                setTimeout(() => floatIcon.remove(), 1500);
+            });
         }
 
         function checkAndSetupAnimations() {

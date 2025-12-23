@@ -72,6 +72,13 @@
             position: relative;
             cursor: pointer;
             user-select: none;
+            /* 移動端性能優化 */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            will-change: auto;
+            /* GPU 加速 */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         /* 雙模型容器 */
@@ -87,46 +94,50 @@
             height: 100% !important;
         }
 
-        /* 互動圖標動畫 */
+        /* 互動圖標動畫 - 性能優化版 */
         .interaction-icon {
             position: absolute;
             font-size: 40px;
             pointer-events: none;
-            animation: floatUp 1.5s ease-out forwards;
             z-index: 100;
+            will-change: transform, opacity;
+            animation: floatUp 1s ease-out forwards;
+            transform-origin: center;
         }
 
         @keyframes floatUp {
             0% {
-                transform: translateY(0) scale(0.5);
+                transform: translate3d(0, 0, 0) scale(0.5);
                 opacity: 1;
             }
             50% {
-                transform: translateY(-80px) scale(1.2);
+                transform: translate3d(var(--random-x, 0), -80px, 0) scale(1.2);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-150px) scale(0.8);
+                transform: translate3d(var(--random-x, 0), -150px, 0) scale(0.8);
                 opacity: 0;
             }
         }
 
-        /* 點擊波紋效果 */
+        /* 點擊波紋效果 - 性能優化版 */
         .ripple {
             position: absolute;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             pointer-events: none;
-            animation: ripple-animation 0.6s ease-out;
+            will-change: transform, opacity;
+            animation: ripple-animation 0.5s ease-out;
+            transform-origin: center;
         }
 
         @keyframes ripple-animation {
             from {
-                transform: scale(0);
+                transform: translate3d(-50%, -50%, 0) scale(0);
                 opacity: 1;
             }
             to {
-                transform: scale(4);
+                transform: translate3d(-50%, -50%, 0) scale(4);
                 opacity: 0;
             }
         }
@@ -865,38 +876,74 @@
             }
         }
 
-        // 設置點擊互動
+        // 設置點擊互動 - 性能優化版
         function setupInteraction(icon) {
             const modelContainer = document.getElementById('modelContainer');
+            let lastClickTime = 0;
+            const clickDelay = 200; // 防抖延迟（毫秒）
             
-            modelContainer.addEventListener('click', function(e) {
-                // 創建波紋效果
+            // 处理点击/触摸事件的通用函数
+            function handleInteraction(e) {
+                // 防抖处理
+                const now = Date.now();
+                if (now - lastClickTime < clickDelay) {
+                    return;
+                }
+                lastClickTime = now;
+                
+                // 获取点击位置
+                const rect = modelContainer.getBoundingClientRect();
+                let x, y;
+                
+                if (e.type === 'touchstart') {
+                    const touch = e.touches[0];
+                    x = touch.clientX - rect.left;
+                    y = touch.clientY - rect.top;
+                } else {
+                    x = e.clientX - rect.left;
+                    y = e.clientY - rect.top;
+                }
+                
+                // 创建波纹效果（使用transform优化性能）
                 const ripple = document.createElement('div');
                 ripple.className = 'ripple';
-                const rect = modelContainer.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
                 ripple.style.left = x + 'px';
                 ripple.style.top = y + 'px';
                 ripple.style.width = '50px';
                 ripple.style.height = '50px';
                 modelContainer.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
                 
-                // 創建飄浮圖標
+                // 使用更快的方式移除元素
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 500);
+                
+                // 创建飘浮图标（使用CSS变量和transform优化）
                 const floatIcon = document.createElement('div');
                 floatIcon.className = 'interaction-icon';
                 floatIcon.textContent = icon;
-                floatIcon.style.left = (x - 20) + 'px';
-                floatIcon.style.top = (y - 20) + 'px';
+                floatIcon.style.left = x + 'px';
+                floatIcon.style.top = y + 'px';
+                
+                // 随机偏移（使用CSS变量）
+                const randomX = (Math.random() - 0.5) * 60;
+                floatIcon.style.setProperty('--random-x', randomX + 'px');
+                
                 modelContainer.appendChild(floatIcon);
                 
-                // 隨機偏移
-                const randomX = (Math.random() - 0.5) * 60;
-                floatIcon.style.transform = `translateX(${randomX}px)`;
-                
-                setTimeout(() => floatIcon.remove(), 1500);
-            });
+                // 使用更快的方式移除元素
+                setTimeout(() => {
+                    if (floatIcon.parentNode) {
+                        floatIcon.parentNode.removeChild(floatIcon);
+                    }
+                }, 1000);
+            }
+            
+            // 同时监听点击和触摸事件
+            modelContainer.addEventListener('click', handleInteraction, { passive: true });
+            modelContainer.addEventListener('touchstart', handleInteraction, { passive: true });
         }
 
         function checkAndSetupAnimations() {

@@ -427,9 +427,7 @@
             </model-viewer>
 
             <div class="animation-controls" id="animationControls">
-                <button class="control-btn" id="playBtn" disabled>▶️ 播放</button>
-                <button class="control-btn" id="pauseBtn" style="display: none;" disabled>⏸️ 暫停</button>
-                <button class="control-btn" id="rotateBtn" disabled>🔄 旋轉</button>
+                <button class="control-btn" id="rotateBtn">🔄 旋轉</button>
             </div>
         </div>
 
@@ -439,7 +437,8 @@
 
         <div class="controls">
             <p>💡 使用滑鼠拖曳可以旋轉3D模型</p>
-            <p>✨ 點擊播放按鈕可以觀看動畫效果</p>
+            <p>✨ 點擊「旋轉」按鈕開啟自動旋轉</p>
+            <p>🎯 點擊模型會飄出專屬圖案</p>
         </div>
     </div>
 
@@ -620,7 +619,7 @@
                 name: '簡妤庭',
                 model: 'MODELS/18.glb',
                 background: 'MODELS/background-18.jpg',
-                interactionIcon: '💎',
+                interactionIcon: '👑',
                 speeches: [
                     { text: '我是簡妤庭，我的角色叫美人。', type: 'left' },
                     { text: '你不覺得今天的天空，看起來特別漂亮嗎？', type: 'right', decoration: '🎧' }
@@ -630,7 +629,7 @@
                 name: '莊加安',
                 model: 'MODELS/19.glb',
                 background: 'MODELS/background-19.jpg',
-                interactionIcon: '👁️',
+                interactionIcon: '🎵',
                 speeches: [
                     { text: '我是莊加安，我的角色叫懶洋洋。', type: 'left' },
                     { text: '如果你找到我，也許我會陪你一起玩躲貓貓。', type: 'right', decoration: '🎹' }
@@ -660,7 +659,7 @@
                 name: '李玨潤',
                 model: 'MODELS/22.glb',
                 background: 'MODELS/background-22.jpg',
-                interactionIcon: '🎾',
+                interactionIcon: '☀️',
                 speeches: [
                     { text: '我是李玨潤，我的角色喜歡冒險。', type: 'left' },
                     { text: '我們一起走，走到很遠很遠的地方吧。', type: 'right', decoration: '🦖' }
@@ -697,8 +696,6 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const animationControls = document.getElementById('animationControls');
         const speechBubblesContainer = document.getElementById('speechBubblesContainer');
-        const playBtn = document.getElementById('playBtn');
-        const pauseBtn = document.getElementById('pauseBtn');
         const rotateBtn = document.getElementById('rotateBtn');
 
         function getStudentId() {
@@ -910,22 +907,15 @@
                 if (animations && animations.length > 0) {
                     modelViewer.animationName = animations[0];
                     
-                    playBtn.disabled = false;
-                    pauseBtn.disabled = false;
-                    rotateBtn.disabled = false;
-                    
+                    // 自動播放動畫
                     setTimeout(() => {
                         try {
                             modelViewer.play();
-                            playBtn.style.display = 'none';
-                            pauseBtn.style.display = 'block';
                             console.log('▶️ 自動開始播放動畫');
                         } catch (error) {
                             console.error('自動播放失敗:', error);
                         }
                     }, 500);
-                } else {
-                    rotateBtn.disabled = false;
                 }
             } catch (error) {
                 console.error('檢查動畫時出錯:', error);
@@ -933,40 +923,18 @@
         }
 
         function setupControlButtons() {
-            playBtn.onclick = () => {
-                if (!modelLoaded) return;
-                try {
-                    modelViewer.play();
-                    playBtn.style.display = 'none';
-                    pauseBtn.style.display = 'block';
-                } catch (error) {
-                    console.error('播放失敗:', error);
-                }
-            };
-
-            pauseBtn.onclick = () => {
-                if (!modelLoaded) return;
-                try {
-                    modelViewer.pause();
-                    pauseBtn.style.display = 'none';
-                    playBtn.style.display = 'block';
-                } catch (error) {
-                    console.error('暫停失敗:', error);
-                }
-            };
-
             rotateBtn.onclick = () => {
                 if (!modelLoaded) return;
                 try {
                     isRotating = !isRotating;
                     if (isRotating) {
                         modelViewer.setAttribute('auto-rotate', '');
-                        rotateBtn.textContent = '🔄 旋轉';
-                        rotateBtn.classList.remove('active');
+                        rotateBtn.textContent = '⏸️ 暫停旋轉';
+                        rotateBtn.classList.add('active');
                     } else {
                         modelViewer.removeAttribute('auto-rotate');
-                        rotateBtn.textContent = '⏹️ 停止';
-                        rotateBtn.classList.add('active');
+                        rotateBtn.textContent = '🔄 旋轉';
+                        rotateBtn.classList.remove('active');
                     }
                 } catch (error) {
                     console.error('切換旋轉失敗:', error);
